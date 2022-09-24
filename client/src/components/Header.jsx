@@ -6,7 +6,7 @@ export default function Header() {
   const { authed, handleLogout } = useAuth();
   return (
     <header>
-      <h2>Magic Moss River Forecastor</h2>
+      <h2>Mystical Moss River Forecaster</h2>
       <nav className='nav'>
         <NavLink to='/'>Home</NavLink>
         {authed &&
