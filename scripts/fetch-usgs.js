@@ -30,14 +30,14 @@ console.log(url)
       skipLines--;
       return [];
     }
-    const [ siteNumber, date, tz, cfs, , gaugeHeight, ] = line.split(/\t/);
+    const [ siteNumber, date, tz, cfs, gaugeHeight ] = line.split(/\t/);
     return {
       siteNumber: parseFloat(siteNumber),
       date: new Date(`${date} ${tz}`),
       cfs: parseFloat(cfs),
       ft : parseFloat(gaugeHeight)
     }
-    return line;
+    // return line;
   });
   console.log(data);
   await writeFile('client/src/data/usgs.json', JSON.stringify(data, null, 2));

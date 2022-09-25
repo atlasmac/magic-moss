@@ -8,6 +8,7 @@ const logger = require('morgan');
 const connectDB = require('./config/database');
 const mainRoutes = require('./routes/main');
 const commentRoutes = require('./routes/comments')
+const reportRoutes = require('./routes/reports')
 
 const cors = require('cors');
 
@@ -46,6 +47,7 @@ app.use(passport.session());
 //Setup Routes For Which The Server Is Listening
 app.use('/', mainRoutes);
 app.use("/comment", commentRoutes);
+app.use("/report", reportRoutes);
 
 app.listen(process.env.PORT, () => {
 	console.log('Server is running, you better catch it!');

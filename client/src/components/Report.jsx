@@ -19,7 +19,8 @@ const Report = () => {
         date: dayjs(data.date).format('ddd DD/MM/YYYY h:mm a'),
         cfs: data.cfs,
         ft: data.ft,
-        siteNumber: data.siteNumber
+        siteNumber: data.siteNumber,
+        type: data.type
       }
     })
 
@@ -36,13 +37,11 @@ const Report = () => {
         siteNumber: data.siteNumber
       }
     })
-  // const forecastDates = forecastData.map((data) => data.date)
-  // const forecastCfs = forecastData.map((data) => data.cfs)
-  //setting state for chart js 
+
   const [riverData, setRiverData] = React.useState({
     datasets: [
       {
-        label: ["Observed Cubic Feet Per Second"],
+        label: ["Observed CFS"],
         data: filterObservedData,
         backgroundColor: ["orange"],
         borderColor: "black",
@@ -53,11 +52,14 @@ const Report = () => {
           yAxisKey: 'cfs'
         }
       }, {
-        label: ["Current Level"],
+        label: ["Current CFS"],
         data: lastObserved,
         backgroundColor: ["red"],
-        borderColor: "black",
+        borderColor: "red",
         borderWidth: 2,
+        pointRadius: 6,
+        pointHoverBorderWidth: 9,
+        pointStyle: 'star',
         parsing: {
           xAxisKey: 'date',
           yAxisKey: 'cfs'
@@ -65,7 +67,7 @@ const Report = () => {
 
       },
       {
-        label: ["Forecasted Cubic Feet Per Second"],
+        label: ["Forecasted CFS"],
         data: forecastData,
         backgroundColor: ["green"],
         borderColor: "black",
@@ -81,6 +83,11 @@ const Report = () => {
   })
 
   const lineOptions = {
+    plugins:{
+      tooltip:{
+        intersect: false
+      }
+    },
     scales: {
       xAxis: {
         ticks: {
@@ -165,7 +172,6 @@ const Report = () => {
 
   return (
     <div className='divs'>
-      {/* <h2>The Clark Fork above Missoula is at {observedData[observedData.length - 1].cfs} cfs</h2> */}
       <div>
         <BrennansReport 
           level={observedData[observedData.length - 1]}
