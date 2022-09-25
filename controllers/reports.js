@@ -27,6 +27,21 @@ module.exports = {
       })
     }
   },
+  getReports: async (req, res) => {
+    try {
+      const riverData = await Report.find({ siteNumber: req.params.siteNumber }).lean()
+      res.json(riverData)
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        message: {
+          msgBody: 'Error has occurred while trying to find report',
+          msgError: true,
+          err,
+        }
+      })
+    }
+  },
   updateReport: async (req, res) => {
     try {
       await Report.findOneAndUpdate(
