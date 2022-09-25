@@ -5,6 +5,7 @@ const { promisify } = require('util');
 const clarkForkAboveMissoula = 12340500;
 const site = "Brennan's wave"
 
+
 const fetch = async (...args) => {
   return (await fetchP).default(...args); 
 }
@@ -25,18 +26,20 @@ async function fetchWeather(){
  const siteNumber = clarkForkAboveMissoula;
  const wave = site;
 
+
   const observed = data.site.observed[0]?.datum.map((a) => {
     return {
       date: a.valid[0]?._,
       cfs: parseFloat(a.secondary[0]?._),
       ft: parseFloat(a.primary[0]?._)
+
     };
   });
   const forecast = data.site.forecast[0]?.datum.map((a) => {
     return {
       date: a.valid[0]?._,
       cfs: parseFloat(a.secondary[0]?._),
-      ft: parseFloat(a.primary[0]?._),
+      ft: parseFloat(a.primary[0]?._)
     };
   });
   // console.log(data);
@@ -45,4 +48,5 @@ async function fetchWeather(){
 };
 
 // setInterval(fetchWeather, 10000)
+
 (async () => await fetchWeather())();
