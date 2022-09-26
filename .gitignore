@@ -1,3 +1,7 @@
 node_modules
 .env
 data
+data/
+weatherStRegis.json
+weatherMissoula.json
+weatherStRegis.json
