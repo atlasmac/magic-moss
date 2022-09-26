@@ -1,102 +1,12 @@
 import React from 'react'
 import axios from 'axios';
 import useAuth from '../auth/useAuth';
-import BrennansLineChart from './BrennansLineChart';
-import ForecastTable from './ForecastTable';
-import BrennansReport from './BrennansReport';
-import RiverData from '../data/weather.json'
-import dayjs from 'dayjs'
 
-const Report = () => {
+const Comments = () => {
   const { user, authed } = useAuth();
   const [commentsArr, setCommentsArr] = React.useState([]);
   const [getComments, setGetComments] = React.useState(false)
 
-  const observedData = RiverData.observed
-    .sort((a, b) => new Date(a.date) - new Date(b.date))
-    .map(data => {
-      return {
-        date: dayjs(data.date).format('ddd DD/MM/YYYY h:mm a'),
-        cfs: data.cfs,
-        ft: data.ft,
-        siteNumber: data.siteNumber,
-        type: data.type
-      }
-    })
-
-  const filterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 7 === 0)
-  const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
-
-  const forecastData = RiverData.forecast
-    .sort((a, b) => new Date(a.date) - new Date(b.date))
-    .map(data => {
-      return {
-        date: dayjs(data.date).format('ddd DD/MM/YYYY h:mm a'),
-        cfs: data.cfs,
-        ft: data.ft,
-        siteNumber: data.siteNumber
-      }
-    })
-
-  const [riverData, setRiverData] = React.useState({
-    datasets: [
-      {
-        label: ["Observed CFS"],
-        data: filterObservedData,
-        backgroundColor: ["orange"],
-        borderColor: "black",
-        borderWidth: 2,
-        tension: .6,
-        parsing: {
-          xAxisKey: 'date',
-          yAxisKey: 'cfs'
-        }
-      }, {
-        label: ["Current CFS"],
-        data: lastObserved,
-        backgroundColor: ["red"],
-        borderColor: "red",
-        borderWidth: 2,
-        pointRadius: 6,
-        pointHoverBorderWidth: 9,
-        pointStyle: 'star',
-        parsing: {
-          xAxisKey: 'date',
-          yAxisKey: 'cfs'
-        }
-
-      },
-      {
-        label: ["Forecasted CFS"],
-        data: forecastData,
-        backgroundColor: ["green"],
-        borderColor: "black",
-        borderWidth: 2,
-        tension: .6,
-        parsing: {
-          xAxisKey: 'date',
-          yAxisKey: 'cfs'
-        }
-
-      }
-    ]
-  })
-
-  const lineOptions = {
-    plugins:{
-      tooltip:{
-        intersect: false
-      }
-    },
-    scales: {
-      xAxis: {
-        ticks: {
-          maxTicksLimit: 17
-        }
-      }
-    }
-
-  }
 
   React.useEffect(() => {
     (async () => {
@@ -169,20 +79,8 @@ const Report = () => {
     }
   };
 
-
   return (
-    <div className='divs'>
-      <div>
-        <BrennansReport 
-          level={observedData[observedData.length - 1]}
-        />
-      </div>
-      <div>
-        <BrennansLineChart chartData={riverData} chartOptions={lineOptions} />
-      </div>
-      <div>
-        <ForecastTable forecastData={forecastData}/>
-      </div>
+    <>
       <div>
         <h3>Comments</h3>
         {comments}
@@ -215,10 +113,8 @@ const Report = () => {
           </div>
         </div>
       }
-
-    </div>
-
+    </>
   )
 }
 
-export default Report
+export default Comments

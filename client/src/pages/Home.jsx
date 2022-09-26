@@ -1,8 +1,7 @@
 import React from 'react';
-import Header from '../components/Header';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
-import Report from '../components/Report'
+// import Report from '../components/Report'
 import useAuth from '../auth/useAuth';
 
 
@@ -15,10 +14,9 @@ function Home() {
   }
   return (
     <div>
-      <Header />
       <div className='divs'>
         <h2>This is the home page.</h2>
-        <Report />
+        {/* <Report /> */}
         <div className=''>
           {!authed && <Login />}
           {!authed && !signUp && <div>

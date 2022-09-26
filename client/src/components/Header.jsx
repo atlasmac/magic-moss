@@ -8,6 +8,7 @@ export default function Header() {
     <header>
       <h2>Mystical Moss River Forecaster</h2>
       <nav className='nav'>
+        <NavLink to='/report/12340500'>Brennan's</NavLink>
         <NavLink to='/'>Home</NavLink>
         {authed &&
           <NavLink to='/dashboard'>Dashboard</NavLink>
