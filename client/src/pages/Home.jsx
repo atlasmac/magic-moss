@@ -1,7 +1,6 @@
 import React from 'react';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
-// import Report from '../components/Report'
 import useAuth from '../auth/useAuth';
 
 
@@ -16,7 +15,6 @@ function Home() {
     <div>
       <div className='divs'>
         <h2>This is the home page.</h2>
-        {/* <Report /> */}
         <div className=''>
           {!authed && <Login />}
           {!authed && !signUp && <div>

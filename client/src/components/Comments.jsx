@@ -1,11 +1,14 @@
 import React from 'react'
 import axios from 'axios';
 import useAuth from '../auth/useAuth';
+import { useParams } from 'react-router-dom';
+
 
 const Comments = () => {
   const { user, authed } = useAuth();
   const [commentsArr, setCommentsArr] = React.useState([]);
   const [getComments, setGetComments] = React.useState(false)
+  const { siteNumber } = useParams();
 
 
   React.useEffect(() => {
@@ -13,7 +16,7 @@ const Comments = () => {
       try {
         const response = await axios({
           method: 'Get',
-          url: 'http://localhost:5000/comment',
+          url: `http://localhost:5000/comment/${siteNumber}`,
           withCredentials: true,
         });
         setCommentsArr(response.data)
@@ -21,7 +24,7 @@ const Comments = () => {
         console.log(err)
       }
     })();
-  }, [getComments])
+  }, [siteNumber, commentsArr])
 
   const comments = commentsArr.map(e => {
 
@@ -60,7 +63,7 @@ const Comments = () => {
           comment: formData.comment,
           likes: 0,
         },
-        url: 'http://localhost:5000/comment/createComment',
+        url: `http://localhost:5000/comment/createComment/${siteNumber}`,
         withCredentials: true,
       });
       setGetComments(!getComments);

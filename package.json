@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node scripts/fetch-weather.js && node server.js",
+    "start": "node scripts/fetch-weather.js && node scripts/fetch-weather-zero.js && node scripts/fetch-weather-lochsa.js && node server.js",
     "fetch:weather": "node scripts/fetch-weather.js",
     "fetch:usgs": "node scripts/fetch-usgs.js",
     "build": "cd client && npm install && npm run build"

@@ -5,6 +5,7 @@ module.exports = {
     try {
       await Comment.create({
         comment: req.body.comment,
+        siteNumber: req.params.siteNumber,
         likes: 0,
         user: req.user.id
       });
@@ -28,7 +29,7 @@ module.exports = {
   },
   getComments: async (req, res) => {
     try {
-      const comments = await Comment.find().sort({ createdAt: "asc" }).populate('user').lean()
+      const comments = await Comment.find({siteNumber: req.params.siteNumber}).sort({ createdAt: "asc" }).populate('user').lean()
       res.json(comments)
     } catch (err) {
       console.log(err);
