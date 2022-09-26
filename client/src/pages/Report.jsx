@@ -23,7 +23,10 @@ const Report = () => {
           url: `http://localhost:5000/report/${siteNumber}`,
           withCredentials: true,
         });
-        setriverDataObj(response.data[0]);
+
+        const riverData = response.data[0]
+
+        setriverDataObj(riverData);
       } catch (err) {
         console.log(err)
       }
@@ -46,7 +49,7 @@ const Report = () => {
     })
 
   const filterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 7 === 0)
-  const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
+  const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))[0]
 
   const forecastData = RiverData.forecast
     .sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -125,18 +128,15 @@ const Report = () => {
 
   return (
     <div className='divs'>
-      <div>
-        <CurrentReport
-          spot={spot}
-          level={observedData[observedData.length - 1]}
-        />
-      </div>
-      <div>
-        <LineChart chartData={graphData} chartOptions={lineOptions} />
-      </div>
-      <div>
-        <ForecastTable forecastData={forecastData} />
-      </div>
+      <CurrentReport
+        spot={spot}
+        level={lastObserved}
+      />
+
+      <LineChart chartData={graphData} chartOptions={lineOptions} />
+
+      <ForecastTable forecastData={forecastData} />
+
       <Comments />
     </div>
 
