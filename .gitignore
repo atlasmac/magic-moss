@@ -1,7 +1,7 @@
-node_modules
+data/**
+/weatherStRegis.json
+/weatherMissoula.json
+/weatherStRegis.json
+
+node_modules/
 .env
-data
-data/
-weatherStRegis.json
-weatherMissoula.json
-weatherStRegis.json
