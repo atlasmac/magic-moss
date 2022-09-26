@@ -13,6 +13,10 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref:"User"
   },
+  siteNumber: {
+    type: Number,
+    ref:"Report"
+  },
   createdAt: {
     type: Date,
     default: Date.now,

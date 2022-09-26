@@ -2,8 +2,8 @@ const { Parser } = require('xml2js');
 const fetchP = import('node-fetch');
 const fs = require('fs');
 const { promisify } = require('util');
-const siteNumber = 12340500;
-const site = "Brennan's wave"
+const siteNumber = 12354500;
+const site = "Zero Wave"
 
 
 const fetch = async (...args) => {
@@ -15,7 +15,7 @@ async function fetchWeather(){
   const writeFile = promisify(fs.writeFile);
 
   const res = await fetch(
-    'https://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=abom8&output=xml'
+    'https://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=srgm8&output=xml'
   );
   const xml = await res.text();
   const xmlParser = new Parser();
@@ -39,7 +39,7 @@ async function fetchWeather(){
     };
   });
   // console.log(data);
-  await writeFile('data/weatherMissoula.json', JSON.stringify({ siteNumber, wave : site, observed, forecast }, null, 2));
+  await writeFile('data/weatherStRegis.json', JSON.stringify({ siteNumber, wave : site, observed, forecast }, null, 2));
   return data;
 };
 

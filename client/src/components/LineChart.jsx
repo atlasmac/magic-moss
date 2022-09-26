@@ -2,7 +2,7 @@ import React from 'react'
 import {Line} from 'react-chartjs-2'
 import {Chart as ChartJS} from 'chart.js/auto'
 
-const BrennansLineChart = ({chartData, chartOptions}) => {
+const LineChart = ({chartData, chartOptions}) => {
   return (
     <div style={{width:1000}}>
       <Line data={chartData} options={chartOptions} />
@@ -10,4 +10,4 @@ const BrennansLineChart = ({chartData, chartOptions}) => {
   )
 }
 
-export default BrennansLineChart
+export default LineChart

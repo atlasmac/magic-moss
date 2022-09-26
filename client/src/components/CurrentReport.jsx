@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BrennansReport = ({level}) => {
+const CurrentReport = ({level, spot}) => {
   const getReport = (num) => {
     if (num < 3200){
       return "Really bad surfing conditions at the moment. You may be able to snag a ride on middle wave but you'll work hard for it. The best board for today is a foamie with fins you're ok with losing.";
@@ -19,7 +19,7 @@ const BrennansReport = ({level}) => {
   const time = level.date
   return (
     <div>
-      <h1>Brennan's Wave</h1>
+      <h1>{spot}</h1>
       <h2>The Report for {time}.</h2>
       <h2>Flows are currently at {currentLevel} cfs and {currentFeet} feet high at the gauge.</h2>
       <p>{getReport(currentLevel)}<span style={{fontSize:8}}>-Surf Forecaster, Atlas McKinley</span></p>
@@ -27,4 +27,4 @@ const BrennansReport = ({level}) => {
   )
 }
 
-export default BrennansReport
+export default CurrentReport
