@@ -1,8 +1,2 @@
-data/**
-data
-/weatherStRegis.json
-/weatherMissoula.json
-/weatherStRegis.json
-
 node_modules/
 .env
