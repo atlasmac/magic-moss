@@ -54,37 +54,37 @@ function SignUp() {
   return (
     <div className=''>
       <h1 className=''>SignUp</h1>
-      <form onSubmit={handleSubmit} className='form'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-2 w-full items-center'>
         <input
           type='text'
           name='userName'
           placeholder='userName'
           onChange={handleFormChange}
-          className='input input-bordered w-full max-w-xs'
+          className='input border-2 border-base-300 w-full max-w-sm'
         />
         <input
           type='text'
           name='email'
           placeholder='Email'
           onChange={handleFormChange}
-          className='input input-bordered w-full max-w-xs'
+          className='input border-2 border-base-300 w-full max-w-sm'
         />
         <input
           type='password'
           name='password'
           placeholder='Password'
           onChange={handleFormChange}
-          className='input input-bordered w-full max-w-xs'
+          className='input border-2 border-base-300 w-full max-w-sm'
         />
         <input
           type='password'
           name='confirmPassword'
           placeholder='Confirm Password'
           onChange={handleFormChange}
-          className='input input-bordered w-full max-w-xs'
+          className='input border-2 border-base-300 w-full max-w-sm'
         />
-        <div className='card-actions justify-center mt-4'>
-          <button className='btn btn-primary'>Create User</button>
+        <div className='self-center mt-3'>
+          <button className='btn btn-success'>Create User</button>
         </div>
       </form>
       <div

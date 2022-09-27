@@ -3,7 +3,7 @@ const fetchP = import('node-fetch');
 const fs = require('fs');
 const { promisify } = require('util');
 const siteNumber = 12340500;
-const site = "Brennan's wave"
+const site = "Brennan's Wave"
 
 
 const fetch = async (...args) => {

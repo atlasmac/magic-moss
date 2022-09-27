@@ -59,23 +59,23 @@ function Login() {
       <h1 className=''>
         Welcome back!
       </h1>
-      <form onSubmit={handleSubmit} className='form'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-2 w-full items-center'>
         <input
           type='text'
           name='email'
           placeholder='Email'
           onChange={handleFormChange}
-          className=''
+          className='input border-2 border-base-300 w-full max-w-sm'
         />
         <input
           type='password'
           name='password'
           placeholder='Password'
           onChange={handleFormChange}
-          className=''
+          className='input border-2 border-base-300 w-full max-w-sm'
         />
-        <div className=''>
-          <button className=''>Log in</button>
+        <div className='self-center mt-3'>
+          <button className='btn btn-success'>Log in</button>
         </div>
       </form>
       <div
