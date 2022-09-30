@@ -7,4 +7,6 @@ router.get('/:siteNumber', commentsController.getComments);
 
 router.post("/createComment/:siteNumber", commentsController.createComment);
 
+router.delete('/deleteComment', commentsController.deleteComment)
+
 module.exports = router;

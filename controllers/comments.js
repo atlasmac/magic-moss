@@ -29,7 +29,7 @@ module.exports = {
   },
   getComments: async (req, res) => {
     try {
-      const comments = await Comment.find({siteNumber: req.params.siteNumber}).sort({ createdAt: "asc" }).populate('user').lean()
+      const comments = await Comment.find({ siteNumber: req.params.siteNumber }).sort({ createdAt: "asc" }).populate('user').lean()
       res.json(comments)
     } catch (err) {
       console.log(err);
@@ -41,6 +41,27 @@ module.exports = {
         }
       })
     }
-  }
+  },
+  deleteComment: async (req, res) => {
+    try {
+      await Comment.deleteOne({ _id: req.body.id });
+      res.status(200).json({
+        message: {
+          msgBody: 'Deleted Student!',
+          msgError: false,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        message: {
+          msgBody: 'Error has occured when trying to delete this student.',
+          msgError: true,
+          err,
+        },
+      });
+    }
+  },
+
 
 };

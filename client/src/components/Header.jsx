@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <div className="navbar bg-base-300 rounded-box">
       <div className="flex-1 px-2 lg:flex-none">
-        <a className="text-lg font-bold">MagicMoss</a>
+        <NavLink to='/' className="text-lg font-bold">MagicMoss</NavLink>
       </div>
       <div className="flex justify-end flex-1 px-2">
         <div className="flex items-stretch">

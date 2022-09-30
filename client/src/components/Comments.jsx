@@ -3,6 +3,7 @@ import axios from 'axios';
 import useAuth from '../auth/useAuth';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import {BsTrash} from 'react-icons/bs'
 
 
 const Comments = () => {
@@ -10,7 +11,7 @@ const Comments = () => {
   const [commentsArr, setCommentsArr] = React.useState([]);
   const [getComments, setGetComments] = React.useState(false)
   const { siteNumber } = useParams();
-
+  console.log(user)
 
   React.useEffect(() => {
     (async () => {
@@ -27,8 +28,24 @@ const Comments = () => {
     })();
   }, [siteNumber, getComments])
 
+  async function deleteComment(commentId) {
+		if (window.confirm('Are you sure you want to delete this comment?')) {
+			try {
+				const response = await axios({
+					method: 'DELETE',
+					data: { id: commentId },
+					url: 'http://localhost:5000/comment/deleteComment',
+					withCredentials: true,
+				});
+				console.log('From Server:', response);
+				setGetComments(!getComments);
+			} catch (err) {
+				console.log(err.response);
+			}
+		}
+	}
+
   const comments = commentsArr.map(e => {
-    console.log(e)
     return (
       <div key={e._id}>
         <div className='flex'>
@@ -37,6 +54,9 @@ const Comments = () => {
             <p className="text-sm">
               {e.comment}
             </p>
+            {e.user._id === user._id && <button onClick={() => deleteComment(e._id)}>
+              <BsTrash />
+            </button>}
           </div>
         </div>
       </div>
@@ -78,7 +98,9 @@ const Comments = () => {
         text: response.data.message.msgBody,
         success: true,
       });
-      event.target.reset();
+      setFormData({
+        comment: '',
+      })
     } catch (err) {
       setMsg({
         text: err.response.data.message.msgBody,
