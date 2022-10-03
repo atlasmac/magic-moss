@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 
 const ForecastTable = ({ forecastData }) => {
-  console.log(forecastData)
+  // aconsole.log(forecastData)
   const {siteNumber} = useParams()
     const getMainRating = (num) => {
       // brennans
@@ -72,7 +72,7 @@ const ForecastTable = ({ forecastData }) => {
       waveDescription.push(<td key={data.date}>{getMainRating(data.cfs)}</td>)
     })
 
-    console.log(forecastDataNoon)
+    // console.log(forecastDataNoon)
 
   return (
     // from daisy ui

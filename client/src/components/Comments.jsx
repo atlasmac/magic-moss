@@ -148,7 +148,7 @@ const Comments = () => {
                     {msg ? msg.text : ''}
                   </div>
                   <div className='self-center'>
-                    <button className="btn btn-success mt-8 mb-16">
+                    <button className="btn bg-sky-700 mt-8 mb-16 hover:bg-sky-800 ">
                       Post Comment
                     </button>
                   </div>

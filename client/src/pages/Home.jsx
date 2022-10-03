@@ -4,27 +4,29 @@ import SignUp from '../components/SignUp';
 import useAuth from '../auth/useAuth';
 
 
-function Home() {
+function Home({ showLogin, setShowLogin, setShowSignUp, showSignUp }) {
   const { authed } = useAuth();
-  const [signUp, setSignUp] = React.useState(false)
-
-  const signInHandler = () => {
-    setSignUp(true)
+  const handleClick = () => {
+    setShowLogin(false)
+    setShowSignUp(true)
   }
+  console.log(showLogin)
   return (
     <div>
-      <div className='divs'>
-        <h2>This is the home page.</h2>
-        <div className=''>
-          {!authed && <Login />}
-          {!authed && !signUp && <div>
+      <div>
+        {showLogin && <Login />}
+        {showLogin &&
+          <div className='flex flex-col items-center gap-y-3 pt-6'>
             <p>Don't have an account?</p>
-            <button onClick={signInHandler}>Sign up</button>
-          </div>}
+            <button type='button' onClick={handleClick} className="btn btn-ghost rounded-btn">Sign up</button>
+          </div>
+        }
 
-          {signUp && !authed && <SignUp />}
-          {authed && 'You are logged in.'}
-        </div>
+        {showSignUp && <SignUp />}
+        {showSignUp && <div className='flex flex-col items-center gap-y-3 pt-6'>
+          <button type='button' onClick={handleClick} className="btn btn-ghost rounded-btn">Log in</button>
+        </div>}
+        {authed && 'You are logged in.'}
       </div>
     </div>
   );

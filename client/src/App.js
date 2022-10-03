@@ -8,26 +8,40 @@ import Dashboard from './pages/Dashboard';
 import Report from './pages/Report'
 
 const App = () => {
+  const [showLogin, setShowLogin] = React.useState(false)
+  const [showSignUp, setShowSignUp] = React.useState(false)
   return (
     <>
-    <Header />
-    <Routes>
-      <Route
-        path='/'
-        element={<Home />} />
-      <Route
-        path='/report/:siteNumber'
-        element={<Report />} />
-      <Route
-        path='/dashboard'
-        element={
-          <RequireAuth>
-            <Dashboard />
-          </RequireAuth>
-        }
+      <Header
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+        showSignUp={showSignUp}
+        setShowSignUp={setShowSignUp}
       />
-      <Route path='*' element={<NoMatch />} />
-    </Routes>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <Home
+            showLogin={showLogin}
+            setShowLogin={setShowLogin}
+            showSignUp={showSignUp}
+            setShowSignUp={setShowSignUp}
+            />
+          } />
+        <Route
+          path='/report/:siteNumber'
+          element={<Report />} />
+        <Route
+          path='/dashboard'
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        />
+        <Route path='*' element={<NoMatch />} />
+      </Routes>
     </>
   );
 };

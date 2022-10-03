@@ -52,8 +52,11 @@ function SignUp() {
   };
 
   return (
-    <div className=''>
-      <h1 className=''>SignUp</h1>
+    <div >
+      <div className='flex justify-center p-8'>
+        <h1 className='text-2xl'>Sign up</h1>
+
+      </div>
       <form onSubmit={handleSubmit} className='flex flex-col gap-2 w-full items-center'>
         <input
           type='text'

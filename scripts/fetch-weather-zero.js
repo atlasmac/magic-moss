@@ -4,7 +4,7 @@ const fs = require('fs');
 const { promisify } = require('util');
 const siteNumber = 12354500;
 const site = "Zero Wave"
-
+const axios = require('axios');
 
 const fetch = async (...args) => {
   return (await fetchP).default(...args); 
@@ -40,9 +40,27 @@ async function fetchWeather(){
   });
   // console.log(data);
   await writeFile('data/weatherStRegis.json', JSON.stringify({ siteNumber, wave : site, observed, forecast }, null, 2));
+
   return data;
 };
 
 // setInterval(fetchWeather, 10000)
+// const updateReport = async event => {
+//   try {
+//     const response = await axios({
+//       method: 'PUT',
+//       data: {
+//         siteNumber: siteNumber,
+//         wave: site,
+//         observed: observed,
+//         forecast: forecast,
+//       },
+//       url: `http://localhost:5000/report/updateReport/${siteNumber}`,
+//       withCredentials: true,
+//     });
+//   }		catch (err) {
+//     console.log(err);
+//   }
+// }
 
 (async () => await fetchWeather())();

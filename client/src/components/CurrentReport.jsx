@@ -39,7 +39,7 @@ const CurrentReport = ({ level, spot }) => {
     /// lochsa pipeline
     if (siteNumber === '13337000') {
       if (num < 4500) {
-        return "Unless you want some scenic views. It's not worth the drive until levels are above 4500 cfs.";
+        return "Unless you want some scenic views, It's not worth the drive until levels are above 4500 cfs.";
       } else if (num >= 4500 && num < 7000) {
         return "good conditions. The left shoulder is the sweetspot right now, but it is still a fun and powerful wave."
       } else if (num >= 7000 && num <= 12000) {

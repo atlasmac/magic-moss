@@ -12,9 +12,10 @@ const Report = () => {
   const { siteNumber } = useParams();
   const [riverDataObj, setriverDataObj] = useState([]);
   const [spot, setSpot] = useState('');
+  const [observed, setObserved] = useState([]);
   const [lastObserved, setLastObserved] = useState([]);
   const [forecastData, setForecastData] = useState([]);
-  const [graphData, setGraphData] = React.useState({
+  const [graphData, setGraphData] = useState({
     datasets: [
       {
         label: ["Observed CFS"],
@@ -72,7 +73,7 @@ const Report = () => {
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map(data => {
             return {
-              date: dayjs(data.date).format('ddd DD/MM h A'),
+              date: dayjs(data.date).format('ddd DD/MM h:mm A'),
               cfs: data.cfs,
               ft: data.ft,
             }
@@ -83,7 +84,7 @@ const Report = () => {
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map(data => {
             return {
-              date: dayjs(data.date).format('ddd DD/MM h A'),
+              date: dayjs(data.date).format('ddd DD/MM h:mm A'),
               cfs: data.cfs,
               ft: data.ft
             }
@@ -93,6 +94,7 @@ const Report = () => {
         setLastObserved(lastObserved[0])
         setriverDataObj(riverData);
         setSpot(riverData.wave);
+        setObserved(observedData)
         setGraphData({
           datasets: [
             {
@@ -184,6 +186,7 @@ const Report = () => {
     }
 
   }
+  console.log(lastObserved, observed)
 
   return (
     <div className='container mx-auto'>

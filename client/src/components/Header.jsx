@@ -2,8 +2,18 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 
-export default function Header() {
+export default function Header({showLogin, setShowLogin, setShowSignUp, showSignUp}) {
   const { authed, handleLogout } = useAuth();
+
+  const login = () =>{
+    setShowLogin(true)
+    setShowSignUp(false)
+  }
+  const signUp = () =>{
+    setShowLogin(false)
+    setShowSignUp(true)
+  }
+
   return (
     <div className="navbar bg-base-300 rounded-box">
       <div className="flex-1 px-2 lg:flex-none">
@@ -26,26 +36,14 @@ export default function Header() {
           {authed && (
             <button type='button' onClick={handleLogout} className="btn btn-ghost rounded-btn">Sign out</button>
           )}
+          {!authed && (
+            <button type='button' onClick={login} className="btn btn-ghost rounded-btn">Log in</button>
+          )}
+          {!authed && (
+            <button type='button' onClick={signUp} className="btn btn-ghost rounded-btn">Sign up</button>
+          )}
         </div>
       </div>
     </div>
-    // <nav className='relative container mx-auto p-5'>
-    //   <div className="flex items-center justify-between">
-    //     <NavLink to='/report/12340500'>Brennan's</NavLink>
-    //     <NavLink to='/report/12354500'>Zero</NavLink>
-    //     <NavLink to='/report/13337000'>Lochsa's Pipeline</NavLink>
-    //     <h2>Mystical Moss</h2>
-    //     <NavLink to='/'>Home</NavLink>
-    //     {authed &&
-    //       <NavLink to='/dashboard'>Dashboard</NavLink>
-    //     }
-    //     {authed && (
-    //       <button type='button' onClick={handleLogout}>
-    //         Sign Out
-    //       </button>
-    //     )}
-    //   </div>
-
-    // </nav>
   );
 }
