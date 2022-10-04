@@ -55,7 +55,7 @@ const ForecastTable = ({ forecastData }) => {
   
     const forecastDataNoon = forecastData.filter(data =>{
       let dateParts = data.date.split(' ')
-      return dateParts[2] === '12' && dateParts[3] === 'AM';
+      return dateParts[2] === '12:00' && dateParts[3] === 'AM';
     })
 
 

@@ -62,7 +62,7 @@ const CurrentReport = ({ level, spot }) => {
         <div>
           <h1 className="text-5xl font-bold">{spot}</h1>
           <p className="py-3 text-3xl">The Report for {time}.</p>
-          <p className="py-3 text-2xl">Flows are currently at <span className="font-bold"> {currentLevel} cfs</ span> and <span className="font-bold">{currentFeet}</span> feet high at the gauge.</p>
+          <p className="py-3 text-2xl">Flows are currently at <span className="font-bold"> {currentLevel} cfs</ span> and <span className="font-bold">{currentFeet} feet</span> high at the gauge.</p>
           <p className="py-3 text-2xl">{getReport(currentLevel)}<span style={{ fontSize: 14 }}>  -Atlas</span></p>
           {/* <button className="btn btn-primary">Get Started</button> */}
         </div>

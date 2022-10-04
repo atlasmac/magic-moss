@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import {BsTrash} from 'react-icons/bs'
 
-
 const Comments = () => {
   const { user, authed } = useAuth();
   const [commentsArr, setCommentsArr] = React.useState([]);
@@ -49,12 +48,19 @@ const Comments = () => {
     return (
       <div key={e._id}>
         <div className='flex'>
-          <div className="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed bg-slate-700">
-            <strong>{e.user.userName}</strong> <span className="text-xs text-gray-400">{dayjs(e.createdAt).format('DD/MM/YYYY')}</span>
+          <div className="flex flex-col flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed bg-slate-700">
+            <div className='flex justify-between items-center'>
+            <strong>{e.user.userName}</strong> 
+            <span className="text-xs text-gray-400">{dayjs(e.createdAt).format('DD/MM/YYYY')}</span>
+            </div>
             <p className="text-sm">
               {e.comment}
             </p>
-            {e.user._id === user._id && <button onClick={() => deleteComment(e._id)}>
+            {e.user._id === user._id && 
+            <button
+              className='self-end justify-self-end'
+             onClick={() => deleteComment(e._id)}
+             >
               <BsTrash />
             </button>}
           </div>

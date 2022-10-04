@@ -57,7 +57,7 @@ function Login() {
   return (
     <div className=''>
       <div className='flex justify-center p-8'>
-      <h1 className='text-2xl'>Welcome Back!</h1>
+      {/* <h1 className='text-2xl'>Welcome Back!</h1> */}
 
       </div>
       <form onSubmit={handleSubmit} className='flex flex-col gap-2 w-full items-center'>

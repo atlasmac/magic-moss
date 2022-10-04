@@ -44,6 +44,9 @@ module.exports = {
   },
   updateReport: async (req, res) => {
     try {
+      // if(req.header.authorization !== 'AFF8FE96-8F19-4CEE-85FD-F9FB831A8722'){
+      //   throw new Error('no auth')
+      // }
       await Report.findOneAndUpdate(
         { siteNumber: req.params.siteNumber },
         {

@@ -162,6 +162,7 @@ const Report = () => {
         intersect: false
       }
     },
+    maintainAspectRatio: false,
     scales: {
       y: {
         ticks: { 
