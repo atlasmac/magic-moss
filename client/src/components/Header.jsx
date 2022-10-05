@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
+import logo from '../images/default-logo.png'
 
 export default function Header({showLogin, setShowLogin, setShowSignUp, showSignUp}) {
   const { authed, handleLogout } = useAuth();
@@ -17,7 +18,8 @@ export default function Header({showLogin, setShowLogin, setShowSignUp, showSign
   return (
     <div className="navbar bg-base-300 rounded-box">
       <div className="flex-1 px-2 lg:flex-none">
-        <NavLink to='/' className="text-lg font-bold">MagicMoss</NavLink>
+        <img src={logo} alt="logo" style={{height:30}}/>
+        {/* <NavLink to='/' className="text-lg font-bold">MagicMoss</NavLink> */}
       </div>
       <div className="flex justify-end flex-1 px-2">
         <div className="flex items-stretch">

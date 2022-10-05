@@ -191,6 +191,7 @@ const Report = () => {
 
   return (
     <div className='container mx-auto'>
+
       {forecastData.length > 1 && <CurrentReport
         spot={spot}
         level={lastObserved}

@@ -8,6 +8,11 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+  favorites: {
+    type: Array,
+    required: true,
+  }
+ 
 });
 
 // Password hash middleware.
