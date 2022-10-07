@@ -9,7 +9,10 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 	},
   favorites: {
-    type: Array,
+    type: [{
+      siteNumber: Number,
+      wave: String
+    }],
     required: true,
   }
  

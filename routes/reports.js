@@ -5,6 +5,7 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 router.get('/:siteNumber', reportsController.getReports);
 router.post("/createReport", reportsController.createReport);
+router.put('/favoriteReport', reportsController.favoriteReport);
 router.put("/updateReport/:siteNumber", reportsController.updateReport);
 
 

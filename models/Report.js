@@ -16,7 +16,8 @@ const ReportSchema = new mongoose.Schema({
       date: String,
       cfs: Number,
       ft: Number
-    }]
+    }],
+    required: true
   },
   createdAt: {
     type: Date,

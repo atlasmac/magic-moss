@@ -8,16 +8,20 @@ import axios from 'axios';
 const CurrentReport = ({ level, spot }) => {
   const { siteNumber } = useParams()
   const { user, authed } = useAuth()
-  const [favorite, setFavorite] = React.useState((user.favorites.includes(siteNumber) ? true : false)
+  const [favorite, setFavorite] = React.useState(
+    (user.favorites?.some(e => e.siteNumber == siteNumber)) ? true : false
   )
 
-  React.useEffect(()=>{
-    if (user.favorites.includes(siteNumber)) {
+  console.log(user.favorites)
+
+  React.useEffect(() => {
+    if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
       setFavorite(true)
-    } else {
+    }
+    else {
       setFavorite(false)
     }
-  },[siteNumber, user.favorites])
+  }, [siteNumber, user.favorites, spot])
 
   const getReport = (num) => {
     /// Missoula
@@ -67,15 +71,17 @@ const CurrentReport = ({ level, spot }) => {
   }
 
   const addFavorite = async event => {
+
     let newArr
     if (user.favorites) {
-      user.favorites.push(siteNumber)
+      user.favorites.push({ siteNumber: siteNumber, wave: spot })
       newArr = [...new Set(user.favorites)]
       // console.log(newArr)
       // console.log(user.favorites)
     } else {
-      newArr = [siteNumber]
+      newArr = [{ siteNumber: siteNumber, wave: spot }]
     }
+    setFavorite(!favorite)
     try {
       const response = await axios({
         method: 'PUT',
@@ -87,7 +93,8 @@ const CurrentReport = ({ level, spot }) => {
         withCredentials: true,
       });
       console.log(response);
-      if (user.favorites.includes(siteNumber)) {
+
+      if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
         setFavorite(true)
       } else {
         setFavorite(false)
@@ -98,10 +105,13 @@ const CurrentReport = ({ level, spot }) => {
   };
 
   async function handleDelete() {
-    let index = user.favorites.indexOf(siteNumber)
+    // let index = user.favorites.indexOf(siteNumber)
+    // let index = 1
+    const index = user.favorites.map(e => e.siteNumber).indexOf(siteNumber)
     console.log(index)
     user.favorites.splice(index, 1);
     let newArr = user.favorites
+    setFavorite(!favorite)
     try {
       const response = await axios({
         method: 'PUT',
@@ -113,7 +123,8 @@ const CurrentReport = ({ level, spot }) => {
         withCredentials: true,
       });
       console.log(response);
-      if (user.favorites.includes(siteNumber)) {
+
+      if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
         setFavorite(true)
       } else {
         setFavorite(false)
@@ -123,7 +134,6 @@ const CurrentReport = ({ level, spot }) => {
     }
   }
 
-
   const currentLevel = level.cfs
   const currentFeet = level.ft
   const time = level.date
@@ -132,7 +142,7 @@ const CurrentReport = ({ level, spot }) => {
       <div className="hero-content flex-col lg:flex-row">
         <img src="https://placeimg.com/260/400/nature" alt="placeholder" className="max-w-sm rounded-lg shadow-2xl" />
         <div className='flex-col'>
-          <div className='w-full flex justify-end h-16'>
+          {authed && <div className='w-full flex justify-end h-16'>
             {favorite && <div className='flex flex-col items-center'>
               <AiFillStar
                 onClick={handleDelete}
@@ -147,7 +157,7 @@ const CurrentReport = ({ level, spot }) => {
               />
               <p>Add to favorites</p>
             </div>}
-          </div>
+          </div>}
           <h1 className="text-5xl font-bold">{spot}</h1>
           <p className="py-3 text-3xl">The Report for {time}.</p>
           <p className="py-3 text-2xl">Flows are currently at <span className="font-bold"> {currentLevel} cfs</ span> and <span className="font-bold">{currentFeet} feet</span> high at the gauge.</p>

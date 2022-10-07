@@ -27,6 +27,22 @@ module.exports = {
       })
     }
   },
+  favoriteReport: async (req, res) => {
+    console.log(req.body)
+    try {
+      const riverData = await Report.find({ siteNumber : { $in : req.body.siteNumbers }})
+      res.json(riverData)
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        message: {
+          msgBody: 'Error has occurred while trying to find report',
+          msgError: true,
+          err,
+        }
+      })
+    }
+  },
   getReports: async (req, res) => {
     try {
       const riverData = await Report.find({ siteNumber: req.params.siteNumber }).lean()
