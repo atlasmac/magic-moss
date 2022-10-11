@@ -14,8 +14,10 @@ const UserSchema = new mongoose.Schema({
       wave: String
     }],
     required: true,
-  }
- 
+  },
+  profileImg: {
+		type: String,
+	},
 });
 
 // Password hash middleware.

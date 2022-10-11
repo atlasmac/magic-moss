@@ -9,6 +9,7 @@
     "axios": "^0.27.2",
     "axois": "^0.0.1-security",
     "chart": "^0.1.2",
+    "cloudinary-react": "^1.8.1",
     "daisyui": "^2.31.0",
     "dayjs": "^1.11.5",
     "js": "^0.1.0",
