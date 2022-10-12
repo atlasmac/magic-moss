@@ -13,4 +13,5 @@ router.get('/authenticated', authController.getAuthenticated);
 router.put('/updateUser', authController.updateUser);
 router.put('/updateFavorites', authController.updateFavorites);
 
+
 module.exports = router;

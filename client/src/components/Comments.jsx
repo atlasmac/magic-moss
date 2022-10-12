@@ -3,7 +3,8 @@ import axios from 'axios';
 import useAuth from '../auth/useAuth';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import {BsTrash} from 'react-icons/bs'
+import { BsTrash } from 'react-icons/bs'
+import { Image } from 'cloudinary-react';
 
 const Comments = () => {
   const { user, authed } = useAuth();
@@ -28,41 +29,57 @@ const Comments = () => {
   }, [siteNumber, getComments])
 
   async function deleteComment(commentId) {
-		if (window.confirm('Are you sure you want to delete this comment?')) {
-			try {
-				const response = await axios({
-					method: 'DELETE',
-					data: { id: commentId },
-					url: 'http://localhost:5000/comment/deleteComment',
-					withCredentials: true,
-				});
-				console.log('From Server:', response);
-				setGetComments(!getComments);
-			} catch (err) {
-				console.log(err.response);
-			}
-		}
-	}
+    if (window.confirm('Are you sure you want to delete this comment?')) {
+      try {
+        const response = await axios({
+          method: 'DELETE',
+          data: { id: commentId },
+          url: 'http://localhost:5000/comment/deleteComment',
+          withCredentials: true,
+        });
+        console.log('From Server:', response);
+        setGetComments(!getComments);
+      } catch (err) {
+        console.log(err.response);
+      }
+    }
+  }
 
   const comments = commentsArr.map(e => {
+    console.log(e.user)
     return (
       <div key={e._id}>
         <div className='flex'>
           <div className="flex flex-col flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed bg-slate-700">
             <div className='flex justify-between items-center'>
-            <strong>{e.user.userName}</strong> 
-            <span className="text-xs text-gray-400">{dayjs(e.createdAt).format('DD/MM/YYYY')}</span>
+              <div className='flex gap-x-3 items-center mb-3'>
+                <div className='avatar'>
+                  <div className="w-20 rounded-full">
+                    <Image
+                      cloudName='dhaprkwnv'
+                      publicId={
+                        e.user.profileImg
+                          ? e.user.profileImg
+                          : 'https://res.cloudinary.com/dhaprkwnv/image/upload/v1663811759/cld-sample-3.jpg'
+                      }
+                    />
+                  </div>
+                </div>
+                <strong>{e.user.userName}</strong>
+
+              </div>
+              <span className="text-xs text-gray-400">{dayjs(e.createdAt).format('DD/MM/YYYY')}</span>
             </div>
-            <p className="text-sm">
+            <p className="text-sm ml-20">
               {e.comment}
             </p>
-            {e.user._id === user._id && 
-            <button
-              className='self-end justify-self-end'
-             onClick={() => deleteComment(e._id)}
-             >
-              <BsTrash />
-            </button>}
+            {e.user._id === user._id &&
+              <button
+                className='self-end justify-self-end'
+                onClick={() => deleteComment(e._id)}
+              >
+                <BsTrash />
+              </button>}
           </div>
         </div>
       </div>
