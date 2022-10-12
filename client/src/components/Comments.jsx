@@ -154,25 +154,12 @@ const Comments = () => {
                     {msg ? msg.text : ''}
                   </div>
                   <div className='self-center'>
-                    <button className="btn bg-sky-700 mt-8 mb-16 hover:bg-sky-800 ">
+                    <button className="btn bg-sky-700 mt-8 mb-16 hover:bg-sky-800">
                       Post Comment
                     </button>
                   </div>
 
                 </div>
-                {/* <label>Comment</label>
-                <input
-                  className='textarea'
-                  type="text"
-                  onChange={handleFormChange}
-                  name="comment"
-                  value={formData.comment}
-                  placeholder="comment"
-                />
-
-              <button>
-                Post Comment
-              </button> */}
               </form>
             </div>
           </div>

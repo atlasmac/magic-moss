@@ -9,6 +9,7 @@ function useAuth() {
 
 	const [authed, setAuthed] = React.useState(false);
 	const [user, setUser] = React.useState({});
+  const [getUser, setGetUser] = React.useState(false);
 
 	React.useEffect(() => {
 		(async () => {
@@ -30,11 +31,13 @@ function useAuth() {
 				console.log(err);
 			}
 		})();
-	}, []);
+	}, [getUser]);
 
 	return {
 		authed,
 		user,
+    getUser,
+		setGetUser,
 		handleLogin(user) {
 			setAuthed(true);
 			setUser(user);

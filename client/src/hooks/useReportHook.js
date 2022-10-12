@@ -1,4 +1,4 @@
-const getReport = (num, siteNumber) => {
+const useReportHook = (num, siteNumber) => {
   /// Missoula
   if (siteNumber === '12340500') {
     if (num < 2000) {
