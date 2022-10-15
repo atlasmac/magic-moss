@@ -19,16 +19,6 @@ function Home({ showLogin, setShowLogin, setShowSignUp, showSignUp }) {
   console.log(showLogin)
   return (
     <div>
-      {/* <div className="hero min-h-fit bg-base-200">
-          <div className="hero-content flex-col lg:flex-row">
-            <img src={image} alt='surfing' className="max-w-lg rounded-lg shadow-2xl" />
-            <div>
-              <h1 className="text-5xl font-bold">Welcome to Magic Moss</h1>
-              <p className="py-6">View current surf reports and forecasted conditions. Share images and interact with your surfing community.</p>
-              <button className="btn btn-primary">Sign up</button>
-            </div>
-          </div>
-        </div> */}
       <div className="hero custom-90vh" style={{ backgroundImage: `url('${background}')` }}>
         <div className="hero-overlay bg-opacity-70"></div>
         <div className="hero-content text-center text-neutral-content">

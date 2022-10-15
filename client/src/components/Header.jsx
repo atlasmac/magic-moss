@@ -37,12 +37,12 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
                 <li className="menu-title">
                   <span>Montana</span>
                 </li>
-                <li><NavLink to='/report/12340500' className="btn btn-ghost rounded-btn">Brennan's</NavLink></li>
-                <li><NavLink to='/report/12354500' className="btn btn-ghost rounded-btn">Zero</NavLink></li>
+                <li><NavLink to='/report/12340500'>Brennan's</NavLink></li>
+                <li><NavLink to='/report/12354500'>Zero</NavLink></li>
                 <li className="menu-title">
                   <span>Idaho</span>
                 </li>
-                <li><NavLink to='/report/13337000' className="btn btn-ghost rounded-btn">Lochsa's Pipeline</NavLink></li>
+                <li><NavLink to='/report/13337000'>Lochsa's Pipeline</NavLink></li>
                 <li className="menu-title">
                   <span>Wyoming</span>
                 </li>

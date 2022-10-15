@@ -16,47 +16,10 @@ const Report = () => {
   const [lastObserved, setLastObserved] = useState([]);
   const [forecastData, setForecastData] = useState([]);
   const [graphData, setGraphData] = useState({
-    datasets: [
-      {
-        label: ["Observed CFS"],
-        data: 0,
-        backgroundColor: ["orange"],
-        borderColor: "black",
-        borderWidth: 2,
-        tension: .6,
-        parsing: {
-          xAxisKey: 'date',
-          yAxisKey: 'cfs'
-        }
-      }, {
-        label: ["Current CFS"],
-        data: 0,
-        backgroundColor: ["red"],
-        borderColor: "red",
-        borderWidth: 2,
-        pointRadius: 6,
-        pointHoverBorderWidth: 9,
-        pointStyle: 'star',
-        parsing: {
-          xAxisKey: 'date',
-          yAxisKey: 'cfs'
-        }
-
-      },
-      {
-        label: ["Forecasted CFS"],
-        data: 0,
-        backgroundColor: ["green"],
-        borderColor: "black",
-        borderWidth: 2,
-        tension: .6,
-        parsing: {
-          xAxisKey: 'date',
-          yAxisKey: 'cfs'
-        }
-
-      }
-    ]
+    datasets: [{ data: 0 }, { data: 0 }, { data: 0 }]
+  })
+  const [mobileGraphData, setMobileGraphData] = useState({
+    datasets: [{ data: 0 }, { data: 0 }, { data: 0 }]
   })
 
   React.useEffect(() => {
@@ -78,7 +41,8 @@ const Report = () => {
               ft: data.ft,
             }
           })
-        const filterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 7 === 0)
+        const filterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 10 === 0)
+        const mobileFilterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 16 === 0)
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
         const forecastData = riverData.forecast
           .sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -89,6 +53,7 @@ const Report = () => {
               ft: data.ft
             }
           })
+        const mobileForecastData = forecastData.filter((el, i, arr) => i === (arr.length - 2) || i % 4 === 0)
 
         setForecastData(forecastData)
         setLastObserved(lastObserved[0])
@@ -140,6 +105,51 @@ const Report = () => {
             }
           ]
         })
+        setMobileGraphData({
+          datasets: [
+            {
+              label: ["Observed CFS"],
+              data: mobileFilterObservedData,
+              backgroundColor: ["orange"],
+              borderColor: "orange",
+              borderWidth: 2,
+              pointRadius: 5,
+              tension: .6,
+              parsing: {
+                xAxisKey: 'date',
+                yAxisKey: 'cfs'
+              }
+            }, {
+              label: ["Current CFS"],
+              data: lastObserved,
+              backgroundColor: ["red"],
+              borderColor: "red",
+              borderWidth: 8,
+              pointRadius: 9,
+              pointHoverBorderWidth: 9,
+              pointStyle: 'star',
+              parsing: {
+                xAxisKey: 'date',
+                yAxisKey: 'cfs'
+              }
+
+            },
+            {
+              label: ["Forecasted CFS"],
+              data: mobileForecastData,
+              backgroundColor: ["green"],
+              borderColor: "green",
+              borderWidth: 2,
+              pointRadius: 5,
+              tension: .6,
+              parsing: {
+                xAxisKey: 'date',
+                yAxisKey: 'cfs'
+              }
+
+            }
+          ]
+        })
 
       } catch (err) {
         console.log(err)
@@ -165,7 +175,7 @@ const Report = () => {
     maintainAspectRatio: false,
     scales: {
       y: {
-        ticks: { 
+        ticks: {
           color: 'rgb(166, 173, 186)',
           font: {
             size: 18 // 'size' now within object 'font {}'
@@ -185,27 +195,73 @@ const Report = () => {
         }
       }
     }
-
   }
-  console.log(lastObserved, observed)
+  const mobileLineOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
+          // fontSize: 18  // not 'fontSize:' anymore
+          font: {
+            size: 24 // 'size' now within object 'font {}'
+          }
+        }
+      },
+      tooltip: {
+        intersect: false
+      }
+    },
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        ticks: {
+          color: 'rgb(166, 173, 186)',
+          font: {
+            size: 18 // 'size' now within object 'font {}'
+          }
+        },
+        grid: {
+          color: "rgba(0, 0, 0, 0)"
+        }
+      },
+      x: {
+        ticks: {
+          color: 'rgb(166, 173, 186)',
+          font: {
+            size: 18 // 'size' now within object 'font {}'
+          },
+          maxTicksLimit: 9
+        }
+      }
+    }
+  }
 
   return (
     <div className='container mx-auto'>
-
-      {forecastData.length > 1 && <CurrentReport
-        spot={spot}
-        level={lastObserved}
-      />}
       {forecastData.length < 1 &&
         <div>
           <h1>Forecast Loading.....</h1>
         </div>
       }
-      {forecastData.length > 1 && <LineChart chartData={graphData} chartOptions={lineOptions} />}
 
-      {forecastData.length > 1 && <ForecastTable forecastData={forecastData} />}
 
-      {forecastData.length > 1 && <Comments />}
+      {forecastData.length > 1 &&
+        <div>
+          <CurrentReport spot={spot} level={lastObserved}/>
+          <div className='hidden lg:block'>
+            <LineChart chartData={graphData} chartOptions={lineOptions} />
+          </div>
+          <div className='block lg:hidden'>
+            <LineChart chartData={mobileGraphData} chartOptions={mobileLineOptions} />
+          </div>
+
+          <ForecastTable forecastData={forecastData} />
+
+          <Comments />
+          
+        </div>
+
+      }
     </div>
 
   )

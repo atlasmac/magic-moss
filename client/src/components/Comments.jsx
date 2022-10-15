@@ -147,10 +147,16 @@ const Comments = () => {
   return (
     <div className="min-h-fit bg-base-200 pt-8 pb-8">
       <div className='antialiased mx-auto max-w-screen-sm'>
-
-        <div className='text-center '>
+        {!authed &&
+          <div className='text-center'>
+            <h3 className="mb-4 text-lg font-semibold">Log in or sign up to comment</h3>
+          </div>
+        }
+        {authed && 
+        <div className='text-center'>
           <h3 className="mb-4 text-lg font-semibold">Comments</h3>
         </div>
+        }
 
         {authed &&
           <div className="max-w-screen-sm">
@@ -187,15 +193,9 @@ const Comments = () => {
           </div>
         }
 
-        <div className='flex-col space-y-8 max-h-screen-70 pr-3 hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-track-base-200 scrollbar-thumb-rounded-md overflow-y-scroll'>
-
+        <div className='flex-col space-y-8 max-h-screen-70 pr-3 pl-3 hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-track-base-200 scrollbar-thumb-rounded-md overflow-y-scroll'>
           {comments}
         </div>
-        {!authed &&
-          <div>
-            <h3>Log in or sign up to comment</h3>
-          </div>
-        }
 
       </ div>
     </div>
