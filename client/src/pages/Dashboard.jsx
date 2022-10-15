@@ -15,7 +15,7 @@ function Dashboard() {
   const edit = () => {
     setEditMode(!editMode)
   }
-  
+
   React.useEffect(() => {
     (async () => {
       try {
@@ -39,11 +39,11 @@ function Dashboard() {
   let conditions = [];
   favoriteData.forEach((data, i) => {
     console.log(data.observed[data.observed.length - 1].cfs, data.siteNumber)
-    waves.push(<li key={`${i}${data.date}`} className={`ml-2`} ><NavLink className={'link-accent'} to={`/report/${data.siteNumber}`}>{data.wave}</NavLink></li>)
-    currentFlows.push(<li key={`${i}${data.date}`} className={`ml-2`} >{data.observed[data.observed.length - 1].cfs} CFS</li>)
+    waves.push(<li key={`${i}${data.date}`} className={`text text-sm h-10 md:text-lg`} ><NavLink className={'link-accent'} to={`/report/${data.siteNumber}`}>{data.wave}</NavLink></li>)
+    currentFlows.push(<li key={`${i}${data.date}`} className={`text-sm h-10 md:text-lg`} >{data.observed[data.observed.length - 1].cfs} CFS</li>)
     conditions.push([data.observed[data.observed.length - 1].cfs, data.siteNumber])
   });
-  const conditionsLi = getConditions(conditions).map((el, i) => (<li key={i}>{el}</li>))
+  const conditionsLi = getConditions(conditions).map((el, i) => (<li className={`text-sm h-10 md:text-lg`} key={i}>{el}</li>))
 
   const [msg, setMsg] = React.useState({
     text: '',
@@ -79,7 +79,7 @@ function Dashboard() {
         success: true,
       })
       edit();
-      setGetUser(!getUser) 
+      setGetUser(!getUser)
     } catch (err) {
       console.log(err);
       setMsg({
@@ -114,7 +114,7 @@ function Dashboard() {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
         <div className="avatar flex-col items-center">
-          <div className="w-80 rounded-full">
+          <div className="w-60 rounded-full md:w-80">
             <Image
               cloudName='dhaprkwnv'
               publicId={
@@ -145,52 +145,53 @@ function Dashboard() {
             Change Profile Picture
           </button>}
           <div
-							className={
-								msg.success
-									? 'text-green-400 text-center'
-									: 'text-red-400 text-center'
-							}
-						>
-							{msg ? msg.text : ''}
-						</div>
+            className={
+              msg.success
+                ? 'text-green-400 text-center'
+                : 'text-red-400 text-center'
+            }
+          >
+            {msg ? msg.text : ''}
+          </div>
         </div>
 
         <div>
-          <h1 className="text-5xl font-bold text-center ">Hi {user.userName[0].toUpperCase() + user.userName.slice(1)}, welcome to your dashboard page.</h1>
+          <h1 className="text-2xl font-bold text-center md:text-5xl">Hi {user.userName[0].toUpperCase() + user.userName.slice(1)}, welcome to your dashboard page.</h1>
 
           <div className=''>
-            { favoriteData.length < 1 &&<div className='gap-y-3 pl-3 pr-3 mt-10'>
-              <h2 className="text-3xl font-bold text-center ">Visit reports and add your favorite surf spots.</h2>
+            {favoriteData.length < 1 && <div className='gap-y-3 pl-3 pr-3 mt-10'>
+              <h2 className="text-xl font-bold text-center md:text-3xl">Visit reports and add your favorite surf spots.</h2>
             </div>}
 
-            {favoriteData.length > 0 &&<div className='flex mt-10 justify-center gap-x-1'>
-             <div className='flex flex-col gap-y-3 pl-3 pr-3'>
-              <h2 className='text-2xl font-bold whitespace-nowrap'>Favorite Spot</h2>
-              <ul
-                className='flex flex-col gap-y-4 text-xl bg-slate-700 p-4 pl-6 pr-6 rounded-bl-2xl whitespace-nowrap'
-              >
-                {waves}
-              </ul>
-            </div>
+            {favoriteData.length > 0 &&
+              <div className='flex mt-10 justify-center gap-x-1'>
+                <div className='flex flex-col gap-y-3 pl-3 pr-3'>
+                  <h2 className='text-xl font-bold md:whitespace-nowrap h-20 md:text-2xl sm:h-14'>Favorite Spot</h2>
+                  <ul
+                    className='flex flex-col gap-y-4 text-xl bg-slate-700 p-4 pl-6 pr-6 rounded-bl-2xl h-full justify-center md:whitespace-nowrap'
+                  >
+                    {waves}
+                  </ul>
+                </div>
 
-            <div className='flex flex-col gap-y-3'>
-              <h2 className='text-2xl font-bold whitespace-nowrap'>Current Flows</h2>
-              <ul
-                className='flex flex-col gap-y-4 text-xl bg-slate-700 p-4 pl-8 pr-8 whitespace-nowrap'
-              >
-                {currentFlows}
-              </ul>
-            </div>
+                <div className='flex flex-col gap-y-3'>
+                  <h2 className='text-xl font-bold md:whitespace-nowrap h-20 md:text-2xl sm:h-14'>Current Flows</h2>
+                  <ul
+                    className='flex flex-col gap-y-4 text-xl bg-slate-700 p-4 pl-8 pr-8 h-full justify-center md:whitespace-nowrap'
+                  >
+                    {currentFlows}
+                  </ul>
+                </div>
 
-            <div className='flex flex-col gap-y-3 pl-3 pr-3'>
-              <h2 className='text-2xl font-bold whitespace-nowrap'>Conditions</h2>
-              <ul
-                className='flex flex-col gap-y-4 text-xl bg-slate-700 p-4 pl-8 pr-8 rounded-br-2xl whitespace-nowrap'
-              >
-                {conditionsLi}
-              </ul>
-            </div>
-            </div>}
+                <div className='flex flex-col gap-y-3 pl-3 pr-3'>
+                  <h2 className='text-xl font-bold md:whitespace-nowrap h-20 md:text-2xl sm:h-14'>Conditions</h2>
+                  <ul
+                    className='flex flex-col gap-y-4 text-xl bg-slate-700 p-4 pl-8 pr-8 rounded-br-2xl h-full justify-center md:whitespace-nowrap'
+                  >
+                    {conditionsLi}
+                  </ul>
+                </div>
+              </div>}
           </div>
         </div>
       </div>

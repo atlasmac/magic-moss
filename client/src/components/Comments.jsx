@@ -46,42 +46,41 @@ const Comments = () => {
   }
 
   const comments = commentsArr.map(e => {
-    console.log(e.user)
     return (
-      <div key={e._id}>
-        <div className='flex'>
-          <div className="flex flex-col flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed bg-slate-700">
-            <div className='flex justify-between items-center'>
-              <div className='flex gap-x-3 items-center mb-3'>
-                <div className='avatar'>
-                  <div className="w-20 rounded-full">
-                    <Image
-                      cloudName='dhaprkwnv'
-                      publicId={
-                        e.user.profileImg
-                          ? e.user.profileImg
-                          : 'https://res.cloudinary.com/dhaprkwnv/image/upload/v1663811759/cld-sample-3.jpg'
-                      }
-                    />
-                  </div>
-                </div>
-                <strong>{e.user.userName}</strong>
+      <div key={e._id} className='flex'>
 
+        <div className="flex flex-col flex-1 rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed bg-base-100">
+          <div className='flex justify-between items-center'>
+            <div className='flex gap-x-3 items-center mb-3'>
+              <div className='avatar'>
+                <div className="w-20 rounded-full">
+                  <Image
+                    cloudName='dhaprkwnv'
+                    publicId={
+                      e.user.profileImg
+                        ? e.user.profileImg
+                        : 'https://res.cloudinary.com/dhaprkwnv/image/upload/v1663811759/cld-sample-3.jpg'
+                    }
+                  />
+                </div>
               </div>
-              <span className="text-xs text-gray-400">{dayjs(e.createdAt).format('DD/MM/YYYY')}</span>
+              <strong>{e.user.userName}</strong>
+
             </div>
-            <p className="text-sm ml-20">
-              {e.comment}
-            </p>
-            {e.user._id === user._id &&
-              <button
-                className='self-end justify-self-end'
-                onClick={() => deleteComment(e._id)}
-              >
-                <BsTrash />
-              </button>}
+            <span className="text-xs text-gray-400">{dayjs(e.createdAt).format('MM/DD/YYYY')}</span>
           </div>
+          <p className="text-sm ml-20">
+            {e.comment}
+          </p>
+          {e.user._id === user._id &&
+            <button
+              className='self-end justify-self-end'
+              onClick={() => deleteComment(e._id)}
+            >
+              <BsTrash />
+            </button>}
         </div>
+
       </div>
     )
   })
@@ -90,6 +89,18 @@ const Comments = () => {
     text: '',
     success: false,
   });
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setMsg({
+        text: '',
+        success: false,
+      })
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [commentsArr]);
+
+
   const [formData, setFormData] = React.useState({
     comment: '',
   });
@@ -134,34 +145,28 @@ const Comments = () => {
   };
 
   return (
-    <div className="min-h-fit bg-base-200">
+    <div className="min-h-fit bg-base-200 pt-8 pb-8">
       <div className='antialiased mx-auto max-w-screen-sm'>
-        <div className='flex-col space-y-8'>
-          <div className='text-center'>
-            <h3 className="mb-4 text-lg font-semibold pt-8">Comments</h3>
-          </div>
-          {comments}
+
+        <div className='text-center '>
+          <h3 className="mb-4 text-lg font-semibold">Comments</h3>
         </div>
-        {!authed &&
-          <div>
-            <h3>Log in or sign up to comment</h3>
-          </div>
-        }
+
         {authed &&
           <div className="max-w-screen-sm">
             <div>
               <form onSubmit={handleSubmit}>
                 <div className="form-control">
-                  <label className="label">
+                  {/* <label className="label">
                     <div className="label-text text-center mx-auto font-semibold">Add Comment</div>
-                  </label>
+                  </label> */}
                   <textarea
-                    className="textarea textarea-bordered border-white h-24 bg-slate-700"
+                    className="textarea h-24 bg-base-100"
                     type="text"
                     onChange={handleFormChange}
                     name="comment"
                     value={formData.comment}
-                    placeholder="....">
+                    placeholder="Add Comment">
                   </textarea>
                   <div className={
                     msg.success
@@ -181,6 +186,17 @@ const Comments = () => {
             </div>
           </div>
         }
+
+        <div className='flex-col space-y-8 max-h-screen-70 pr-3 hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-track-base-200 overflow-y-scroll'>
+
+          {comments}
+        </div>
+        {!authed &&
+          <div>
+            <h3>Log in or sign up to comment</h3>
+          </div>
+        }
+
       </ div>
     </div>
   )

@@ -22,7 +22,7 @@ const ForecastTable = ({ forecastData }) => {
 
 
   forecastDataNoon.forEach((data) => {
-    headers.push(<th key={data.date}>{data.date.split(' ')[0]}</th>)
+    headers.push(<td key={data.date}>{data.date.split(' ')[0]}</td>)
     flows.push(<td key={data.date}>{data.cfs} CFS</td>)
     height.push(<td key={data.date}>{data.ft} ft high</td>)
     waveDescription.push([data.cfs, +siteNumber])
@@ -31,7 +31,7 @@ const ForecastTable = ({ forecastData }) => {
   const conditionsTd = getConditions(waveDescription).map((el, i) => (<td key={`${i}${el}`}>{el}</td>))
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-track-base-200 overflow-scroll">
       <table className="table w-full">
         <thead>
           <tr>

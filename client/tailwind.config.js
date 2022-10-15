@@ -4,9 +4,16 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
 ],
   theme: {
-    extend: {},
+    extend: {
+      maxHeight: {
+        'screen-70': '70vh',
+      }
+    },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
 
   daisyui: {
     styled: true,
