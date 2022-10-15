@@ -1,5 +1,5 @@
 import React from 'react';
-import {HiMenu} from 'react-icons/hi'
+import { HiMenu } from 'react-icons/hi'
 import { NavLink, Link } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 import logo from '../images/default-logo.png'
@@ -34,15 +34,25 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
             <li tabIndex={0}>
               <span className="btn btn-ghost rounded-btn" >Surf Reports</span>
               <ul className="bg-base-100 p-2">
+                <li className="menu-title">
+                  <span>Montana</span>
+                </li>
                 <li><NavLink to='/report/12340500' className="btn btn-ghost rounded-btn">Brennan's</NavLink></li>
                 <li><NavLink to='/report/12354500' className="btn btn-ghost rounded-btn">Zero</NavLink></li>
+                <li className="menu-title">
+                  <span>Idaho</span>
+                </li>
                 <li><NavLink to='/report/13337000' className="btn btn-ghost rounded-btn">Lochsa's Pipeline</NavLink></li>
+                <li className="menu-title">
+                  <span>Wyoming</span>
+                </li>
+                <li><NavLink to='/report/13337000'>Lunch Counter</NavLink></li>
               </ul>
             </li>
             <li><NavLink to='/faq' className="btn btn-ghost rounded-btn">FAQ</NavLink></li>
             {authed &&
-            <li><button type='button' onClick={handleLogout} className="btn btn-ghost rounded-btn">Sign out</button></li>
-          }
+              <li><button type='button' onClick={handleLogout} className="btn btn-ghost rounded-btn">Sign out</button></li>
+            }
           </ul>
         </div>
       </div>
@@ -55,9 +65,19 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
           <div className="dropdown dropdown-start">
             <label tabIndex={0} className="btn btn-ghost rounded-btn">Reports</label>
             <ul tabIndex={0} className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+              <li className="menu-title">
+                <span>Montana</span>
+              </li>
               <li><NavLink className='' to='/report/12340500'>Brennan's</NavLink></li>
               <li><NavLink to='/report/12354500'>Zero</NavLink></li>
+              <li className="menu-title">
+                <span>Idaho</span>
+              </li>
               <li><NavLink to='/report/13337000'>Lochsa's Pipeline</NavLink></li>
+              <li className="menu-title">
+                <span>Wyoming</span>
+              </li>
+              <li><NavLink to='/report/13337000'>Lunch Counter</NavLink></li>
             </ul>
           </div>
           <NavLink to='/' className="btn btn-ghost rounded-btn">FAQ</NavLink>
