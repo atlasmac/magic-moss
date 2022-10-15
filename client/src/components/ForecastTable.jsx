@@ -31,7 +31,7 @@ const ForecastTable = ({ forecastData }) => {
   const conditionsTd = getConditions(waveDescription).map((el, i) => (<td key={`${i}${el}`}>{el}</td>))
 
   return (
-    <div className="overflow-x-auto hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-track-base-200 overflow-scroll">
+    <div className="overflow-x-auto hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-thumb-rounded-md scrollbar-track-base-200 overflow-scroll">
       <table className="table w-full">
         <thead>
           <tr>

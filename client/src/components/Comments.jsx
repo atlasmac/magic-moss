@@ -187,7 +187,7 @@ const Comments = () => {
           </div>
         }
 
-        <div className='flex-col space-y-8 max-h-screen-70 pr-3 hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-track-base-200 overflow-y-scroll'>
+        <div className='flex-col space-y-8 max-h-screen-70 pr-3 hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-track-base-200 scrollbar-thumb-rounded-md overflow-y-scroll'>
 
           {comments}
         </div>
