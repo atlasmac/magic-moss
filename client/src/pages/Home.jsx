@@ -15,7 +15,7 @@ function Home({ showLogin, setShowLogin, setShowSignUp, showSignUp }) {
     setShowLogin(true)
     setShowSignUp(false)
   }
-  console.log(showLogin)
+  
   return (
     <div>
       <div className="hero custom-90vh" style={{ backgroundImage: `url('${background}')` }}>
