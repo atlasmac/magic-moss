@@ -32,27 +32,27 @@ const ForecastTable = ({ forecastData }) => {
       <div className='flex justify-center'>
         <h2 className='text-3xl font-robotoSlab font-bold'>Daily Forecast Levels</h2>
       </div>
-    
-    <div className="overflow-x-auto scrollbar-thin scrollbar-corner-full scrollbar-thumb-slate-400 scrollbar-thumb-rounded-md scrollbar-track-base-200 overflow-scroll mt-3">
-      <table className="table w-full">
-        <thead>
-          <tr>
-            {headers}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {flows}
-          </tr>
-          <tr>
-            {height}
-          </tr>
-          <tr>
-            {conditionsTd}
-          </tr>
-        </tbody>
-      </table>
-    </div>
+
+      <div className="overflow-x-auto scrollbar-thin scrollbar-corner-full scrollbar-thumb-slate-400 scrollbar-thumb-rounded-md scrollbar-track-base-200 overflow-scroll mt-3">
+        <table className="table w-full">
+          <thead>
+            <tr>
+              {headers}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {flows}
+            </tr>
+            <tr>
+              {height}
+            </tr>
+            <tr>
+              {conditionsTd}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </>
   )
 }

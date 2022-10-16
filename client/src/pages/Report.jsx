@@ -4,6 +4,7 @@ import axios from 'axios';
 import LineChart from '../components/LineChart';
 import ForecastTable from '../components/ForecastTable';
 import CurrentReport from '../components/CurrentReport';
+import Loading from '../components/Loading';
 import Comments from '../components/Comments';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
@@ -266,11 +267,8 @@ const Report = () => {
   return (
     <div className='container mx-auto'>
       {forecastData.length < 1 &&
-        <div>
-          <h1>Forecast Loading.....</h1>
-        </div>
+        <Loading />
       }
-
 
       {forecastData.length > 1 &&
         <div>
@@ -281,11 +279,8 @@ const Report = () => {
           <div className='block lg:hidden'>
             <LineChart chartData={mobileGraphData} chartOptions={mobileLineOptions} />
           </div>
-
           <ForecastTable forecastData={forecastData} />
-
           <Comments />
-
         </div>
 
       }

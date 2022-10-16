@@ -27,7 +27,6 @@ const CurrentReport = ({ level, spot }) => {
 
 
   const addFavorite = async event => {
-
     let newArr
     if (user.favorites) {
       user.favorites.push({ siteNumber: siteNumber, wave: spot })
@@ -110,11 +109,14 @@ const CurrentReport = ({ level, spot }) => {
               <p>Add to favorites</p>
             </div>}
           </div>}
-          <h1 className="text-5xl font-robotoSlab font-bold ">{spot}</h1>
+          <h1 className=" py-3 text-5xl font-robotoSlab font-bold ">{spot}</h1>
+          
           <p className="py-3 text-3xl max-w-80"><a href="https://www.google.com/maps" target={'_blank'} rel="noreferrer" className='flex items-center gap-x-2 hover:text-slate-200'><BiMap /> Location</a></p>
-          <p className="py-3 text-3xl max-w-80">The Report for {time}</p>
+          <p className="py-3 text-3xl max-w-80"><span className='font-bold'>Range of surfable flows: </span>~3,000 - 20,0000 cfs</p>
+          <p className="pt-5 pb-3 font-robotoSlab text-4xl max-w-80">The Report for {time}</p>
           <p className="py-3 text-2xl max-w-80">Flows are currently at <span className="font-bold"> {currentLevel} cubic feet per second (cfs)</ span> and <span className="font-bold">{currentFeet} feet</span> high.</p>
           <p className="py-3 text-2xl max-w-80">{getReport(siteNumber, currentLevel)}<span style={{ fontSize: 14 }}>  -Atlas</span></p>
+          
         </div>
       </div>
     </div>
