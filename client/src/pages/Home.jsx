@@ -2,7 +2,6 @@ import React from 'react';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 import useAuth from '../auth/useAuth';
-import image from "../images/tanner-lochsa.png"
 import background from '../images/DaveGardner_04.png'
 
 
@@ -31,13 +30,13 @@ function Home({ showLogin, setShowLogin, setShowSignUp, showSignUp }) {
               <button type='button' onClick={handleClickLog} className="btn btn-ghost rounded-btn text-2xl">Login</button>
             </div>}
             <div className='custom-40vh'>
-              {!authed && showLogin && <Login />}
-              {!authed && showLogin &&
+              {!authed && showLogin && <div>
+                <Login />
                 <div className='flex flex-col items-center gap-y-3 pt-6'>
                   <p>Don't have an account?</p>
                   <button type='button' onClick={handleClickSign} className="btn btn-ghost rounded-btn">Sign up</button>
                 </div>
-              }
+              </div>}
               {!authed && showSignUp && <SignUp />}
               {authed && 'You are logged in.'}
             </div>
