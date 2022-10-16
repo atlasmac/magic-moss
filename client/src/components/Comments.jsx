@@ -149,12 +149,12 @@ const Comments = () => {
       <div className='antialiased mx-auto max-w-screen-sm'>
         {!authed &&
           <div className='text-center'>
-            <h3 className="mb-4 text-lg font-semibold">Log in or sign up to comment</h3>
+            <h3 className="mb-4 text-2xl font-robotoSlab font-semibold">Log in or sign up to comment</h3>
           </div>
         }
         {authed && 
         <div className='text-center'>
-          <h3 className="mb-4 text-lg font-semibold">Comments</h3>
+          <h3 className="mb-4 text-2xl font-robotoSlab font-semibold">Comments</h3>
         </div>
         }
 
@@ -163,9 +163,6 @@ const Comments = () => {
             <div>
               <form onSubmit={handleSubmit}>
                 <div className="form-control">
-                  {/* <label className="label">
-                    <div className="label-text text-center mx-auto font-semibold">Add Comment</div>
-                  </label> */}
                   <textarea
                     className="textarea h-24 bg-base-100"
                     type="text"
@@ -193,7 +190,7 @@ const Comments = () => {
           </div>
         }
 
-        <div className='flex-col space-y-8 max-h-screen-70 pr-3 pl-3 hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-track-base-200 scrollbar-thumb-rounded-md overflow-y-scroll'>
+        <div className='flex-col space-y-8 max-h-screen-70 pr-3 pl-3 scrollbar-thin scrollbar-corner-full scrollbar-thumb-slate-400 scrollbar-track-base-200 scrollbar-thumb-rounded-md overflow-y-scroll'>
           {comments}
         </div>
 

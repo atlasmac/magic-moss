@@ -6,14 +6,12 @@ import useConditionHook from '../hooks/useConditionHook';
 
 const ForecastTable = ({ forecastData }) => {
   const { getConditions } = useConditionHook();
-
   const { siteNumber } = useParams()
 
   const forecastDataNoon = forecastData.filter(data => {
     let dateParts = data.date.split(' ')
     return dateParts[2] === '12:00' && dateParts[3] === 'AM';
   })
-
 
   const headers = [];
   const flows = [];
@@ -23,14 +21,19 @@ const ForecastTable = ({ forecastData }) => {
   forecastDataNoon.forEach((data) => {
     headers.push(<td key={data.date}>{data.date.split(' ')[0]}</td>)
     flows.push(<td key={data.date}>{data.cfs} CFS</td>)
-    height.push(<td key={data.date}>{data.ft} ft high</td>)
+    height.push(<td key={data.date}>{data.ft} feet</td>)
     waveDescription.push([data.cfs, +siteNumber])
   })
 
   const conditionsTd = getConditions(waveDescription).map((el, i) => (<td key={`${i}${el}`}>{el}</td>))
 
   return (
-    <div className="overflow-x-auto hover:scrollbar-thin scrollbar-corner-full scrollbar-thumb-base-300 scrollbar-thumb-rounded-md scrollbar-track-base-200 overflow-scroll mt-3">
+    <>
+      <div className='flex justify-center'>
+        <h2 className='text-3xl font-robotoSlab font-bold'>Daily Forecast Levels</h2>
+      </div>
+    
+    <div className="overflow-x-auto scrollbar-thin scrollbar-corner-full scrollbar-thumb-slate-400 scrollbar-thumb-rounded-md scrollbar-track-base-200 overflow-scroll mt-3">
       <table className="table w-full">
         <thead>
           <tr>
@@ -50,6 +53,7 @@ const ForecastTable = ({ forecastData }) => {
         </tbody>
       </table>
     </div>
+    </>
   )
 }
 

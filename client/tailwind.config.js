@@ -12,7 +12,13 @@ module.exports = {
       height:{
         'screen-70': '70vh',
         'screen-90': '90vh'
-      }
+      },
+      maxWidth: {
+        '80': '80%',
+      },
+      fontFamily: {
+        robotoSlab: ["Roboto Slab", "serif"],
+       },
     },
   },
   plugins: [

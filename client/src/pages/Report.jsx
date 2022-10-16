@@ -42,7 +42,7 @@ const Report = () => {
             }
           })
         const filterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 10 === 0)
-        const mobileFilterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 16 === 0)
+        const mobileFilterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 18 === 0)
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
         const forecastData = riverData.forecast
           .sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -53,7 +53,7 @@ const Report = () => {
               ft: data.ft
             }
           })
-        const mobileForecastData = forecastData.filter((el, i, arr) => i === (arr.length - 2) || i % 4 === 0)
+        const mobileForecastData = forecastData.filter((el, i, arr) => i === (arr.length - 2) || i === 0 || i % 3 === 0)
 
         setForecastData(forecastData)
         setLastObserved(lastObserved[0])
@@ -63,7 +63,7 @@ const Report = () => {
         setGraphData({
           datasets: [
             {
-              label: ["Observed CFS"],
+              label: ["Observed"],
               data: filterObservedData,
               backgroundColor: ["orange"],
               borderColor: "orange",
@@ -75,7 +75,7 @@ const Report = () => {
                 yAxisKey: 'cfs'
               }
             }, {
-              label: ["Current CFS"],
+              label: ["Current"],
               data: lastObserved,
               backgroundColor: ["red"],
               borderColor: "red",
@@ -90,7 +90,7 @@ const Report = () => {
 
             },
             {
-              label: ["Forecasted CFS"],
+              label: ["Forecasted"],
               data: forecastData,
               backgroundColor: ["green"],
               borderColor: "green",
@@ -108,7 +108,7 @@ const Report = () => {
         setMobileGraphData({
           datasets: [
             {
-              label: ["Observed CFS"],
+              label: ["Observed"],
               data: mobileFilterObservedData,
               backgroundColor: ["orange"],
               borderColor: "orange",
@@ -120,7 +120,7 @@ const Report = () => {
                 yAxisKey: 'cfs'
               }
             }, {
-              label: ["Current CFS"],
+              label: ["Current"],
               data: lastObserved,
               backgroundColor: ["red"],
               borderColor: "red",
@@ -135,7 +135,7 @@ const Report = () => {
 
             },
             {
-              label: ["Forecasted CFS"],
+              label: ["Forecasted"],
               data: mobileForecastData,
               backgroundColor: ["green"],
               borderColor: "green",
@@ -159,12 +159,24 @@ const Report = () => {
 
   const lineOptions = {
     plugins: {
+ 
       legend: {
+        title: {
+          display: true,
+          text: 'Cubic Feet per Second (cfs)',
+          color: "rgb(166, 173, 186)",
+          font: {
+            size: 36,
+            family: "'Roboto Slab', Times, serif",
+          },
+        },
         labels: {
+          boxHeight: 30,
+      
           color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
           // fontSize: 18  // not 'fontSize:' anymore
           font: {
-            size: 24 // 'size' now within object 'font {}'
+            size: 30 // 'size' now within object 'font {}'
           }
         }
       },
@@ -199,13 +211,28 @@ const Report = () => {
   const mobileLineOptions = {
     plugins: {
       legend: {
+        title: {
+          display: true,
+          text: 'Cubic Feet per Second (cfs)',
+          color: "rgb(166, 173, 186)",
+          font: {
+            size: 30,
+            family: "'Roboto Slab', Times, serif",
+          },
+        },
+        position: 'top',
         labels: {
           color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
           // fontSize: 18  // not 'fontSize:' anymore
           font: {
-            size: 24 // 'size' now within object 'font {}'
-          }
-        }
+            size: 17, // 'size' now within object 'font {}'
+            
+          },
+          
+          padding: 20,
+
+        },
+      
       },
       tooltip: {
         intersect: false
@@ -247,7 +274,7 @@ const Report = () => {
 
       {forecastData.length > 1 &&
         <div>
-          <CurrentReport spot={spot} level={lastObserved}/>
+          <CurrentReport spot={spot} level={lastObserved} />
           <div className='hidden lg:block'>
             <LineChart chartData={graphData} chartOptions={lineOptions} />
           </div>
@@ -258,7 +285,7 @@ const Report = () => {
           <ForecastTable forecastData={forecastData} />
 
           <Comments />
-          
+
         </div>
 
       }

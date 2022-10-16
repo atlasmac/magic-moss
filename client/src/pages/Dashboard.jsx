@@ -156,7 +156,7 @@ function Dashboard() {
         </div>
 
         <div>
-          <h1 className="text-2xl font-bold text-center md:text-5xl">Hi {user.userName[0].toUpperCase() + user.userName.slice(1)}, welcome to your dashboard page.</h1>
+          <h1 className="text-2xl font-robotoSlab font-bold text-center md:text-5xl">Hi {user.userName[0].toUpperCase() + user.userName.slice(1)}, welcome to your dashboard page.</h1>
 
           <div className=''>
             {favoriteData.length < 1 && <div className='gap-y-3 pl-3 pr-3 mt-10'>
