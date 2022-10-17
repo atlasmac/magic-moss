@@ -4,7 +4,7 @@ function useReportHook() {
       // Missoula
       if (siteNumber === '12340500') {
         if (cfs < 2000) {
-          return "Both middle and main wave at Brennan's are pretty much impossible to surf at the moment.";
+          return "Both middle and main wave at Brennan's are pretty much impossible to surf at the moment due to low water levels.";
         } else if (cfs >= 2000 && cfs < 3200) {
           return "Really bad surfing conditions at the moment. You may be able to snag a ride on middle wave but you'll work hard for it. The best board for today is a foamie with fins you're ok with losing."
         } else if (cfs >= 3200 && cfs < 4500) {
