@@ -37,7 +37,7 @@ const Report = () => {
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map(data => {
             return {
-              date: dayjs(data.date).format('ddd DD/MM h:mm A'),
+              date: dayjs(data.date).format('ddd MM/DD h:mm A'),
               cfs: data.cfs,
               ft: data.ft,
             }
@@ -49,7 +49,7 @@ const Report = () => {
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map(data => {
             return {
-              date: dayjs(data.date).format('ddd DD/MM h:mm A'),
+              date: dayjs(data.date).format('ddd MM/DD h:mm A'),
               cfs: data.cfs,
               ft: data.ft
             }
@@ -66,8 +66,8 @@ const Report = () => {
             {
               label: ["Observed"],
               data: filterObservedData,
-              backgroundColor: ["orange"],
-              borderColor: "orange",
+              backgroundColor: ["rgb(152, 168, 248)"],
+              borderColor: "rgb(152, 168, 248)",
               borderWidth: 2,
               pointRadius: 5,
               tension: .6,
@@ -78,8 +78,8 @@ const Report = () => {
             }, {
               label: ["Current"],
               data: lastObserved,
-              backgroundColor: ["red"],
-              borderColor: "red",
+              backgroundColor: ["rgb(83, 191, 157)"],
+              borderColor: "rgb(83, 191, 157)",
               borderWidth: 8,
               pointRadius: 9,
               pointHoverBorderWidth: 9,
@@ -93,8 +93,8 @@ const Report = () => {
             {
               label: ["Forecasted"],
               data: forecastData,
-              backgroundColor: ["green"],
-              borderColor: "green",
+              backgroundColor: ["rgb(205, 252, 246)"],
+              borderColor: "rgb(205, 252, 246)",
               borderWidth: 2,
               pointRadius: 5,
               tension: .6,
@@ -111,8 +111,8 @@ const Report = () => {
             {
               label: ["Observed"],
               data: mobileFilterObservedData,
-              backgroundColor: ["orange"],
-              borderColor: "orange",
+              backgroundColor: ["rgb(152, 168, 248)"],
+              borderColor: "rgb(152, 168, 248)",
               borderWidth: 2,
               pointRadius: 5,
               tension: .6,
@@ -123,8 +123,8 @@ const Report = () => {
             }, {
               label: ["Current"],
               data: lastObserved,
-              backgroundColor: ["red"],
-              borderColor: "red",
+              backgroundColor: ["rgb(83, 191, 157)"],
+              borderColor: "rgb(83, 191, 157)",
               borderWidth: 8,
               pointRadius: 9,
               pointHoverBorderWidth: 9,
@@ -138,8 +138,8 @@ const Report = () => {
             {
               label: ["Forecasted"],
               data: mobileForecastData,
-              backgroundColor: ["green"],
-              borderColor: "green",
+              backgroundColor: ["rgb(205, 252, 246)"],
+              borderColor: "rgb(205, 252, 246)",
               borderWidth: 2,
               pointRadius: 5,
               tension: .6,

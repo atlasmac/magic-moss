@@ -43,10 +43,10 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
                   <span>Idaho</span>
                 </li>
                 <li><NavLink to='/report/13337000'>Lochsa's Pipeline</NavLink></li>
-                <li className="menu-title">
+                {/* <li className="menu-title">
                   <span>Wyoming</span>
                 </li>
-                <li><NavLink to='/report/13337000'>Lunch Counter</NavLink></li>
+                <li><NavLink to='/report/13337000'>Lunch Counter</NavLink></li> */}
               </ul>
             </li>
             <li><NavLink to='/faq' className="btn btn-ghost rounded-btn">FAQ</NavLink></li>
@@ -74,10 +74,10 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
                 <span>Idaho</span>
               </li>
               <li><NavLink to='/report/13337000'>Lochsa's Pipeline</NavLink></li>
-              <li className="menu-title">
+              {/* <li className="menu-title">
                 <span>Wyoming</span>
               </li>
-              <li><NavLink to='/report/13337000'>Lunch Counter</NavLink></li>
+              <li><NavLink to='/report/13337000'>Lunch Counter</NavLink></li> */}
             </ul>
           </div>
           <NavLink to='/faq' className="btn btn-ghost rounded-btn">FAQ</NavLink>

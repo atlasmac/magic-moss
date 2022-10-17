@@ -5,6 +5,8 @@ import { BiMap } from'react-icons/bi'
 import useAuth from '../auth/useAuth';
 import axios from 'axios';
 import useReportHook from '../hooks/useReportHook';
+import { getRange } from '../helpers/getRange';
+import { getGif } from '../helpers/getGif';
 
 
 const CurrentReport = ({ level, spot }) => {
@@ -91,7 +93,7 @@ const CurrentReport = ({ level, spot }) => {
   return (
     <div className="hero min-h-fit bg-base-200 mt-8 ">
       <div className="hero-content flex-col lg:flex-row">
-        <img src="https://placeimg.com/260/400/nature" alt="placeholder" className="max-w-sm rounded-lg shadow-2xl" />
+        <img src={getGif(siteNumber)} alt="surfing gif" className="max-w-sm rounded-lg shadow-2xl" />
         <div className='flex flex-col items-center lg:items-start'>
           {authed && <div className='w-full flex justify-end h-16'>
             {favorite && <div className='flex flex-col items-center'>
@@ -112,9 +114,9 @@ const CurrentReport = ({ level, spot }) => {
           <h1 className=" py-3 text-5xl font-robotoSlab font-bold ">{spot}</h1>
           
           <p className="py-3 text-3xl max-w-80"><a href="https://www.google.com/maps" target={'_blank'} rel="noreferrer" className='flex items-center gap-x-2 hover:text-slate-200'><BiMap /> Location</a></p>
-          <p className="py-3 text-3xl max-w-80"><span className='font-bold'>Range of surfable flows: </span>~3,000 - 20,0000 cfs</p>
+          <p className="py-3 text-3xl max-w-80"><span className='font-bold'>Range of surfable flows: </span>~{getRange(siteNumber)} cfs</p>
           <p className="pt-5 pb-3 font-robotoSlab text-4xl max-w-80">The Report for {time}</p>
-          <p className="py-3 text-2xl max-w-80">Flows are currently at <span className="font-bold"> {currentLevel} cubic feet per second (cfs)</ span> and <span className="font-bold">{currentFeet} feet</span> high.</p>
+          <p className="py-3 text-2xl max-w-80">Flows are currently at <span className="font-bold"> {currentLevel} cubic feet per second (cfs)</ span> and <span className="font-bold">{currentFeet} feet high</span>.</p>
           <p className="py-3 text-2xl max-w-80">{getReport(siteNumber, currentLevel)}<span style={{ fontSize: 14 }}>  -Atlas</span></p>
           
         </div>
