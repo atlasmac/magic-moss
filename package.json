@@ -1,13 +1,16 @@
 {
   "name": "react-node-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.3.0"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node scripts/fetch-weather.js && node scripts/fetch-weather-zero.js && node scripts/fetch-weather-lochsa.js && node server.js",
+    "start": "node server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "fetch:weather": "node scripts/fetch-weather.js",
+    "fetch:weather": "node scripts/fetch-weather.js && node scripts/fetch-weather-zero.js && node scripts/fetch-weather-lochsa.js",
     "fetch:usgs": "node scripts/fetch-usgs.js"
   },
   "keywords": [],
