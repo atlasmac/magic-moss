@@ -34,7 +34,7 @@ function SignUp() {
           password: signUpData.password,
           confirmPassword: signUpData.confirmPassword,
         },
-        url: 'http://localhost:5000/signup',
+        url: `${process.env.REACT_APP_API_URL}/signup`,
         withCredentials: true,
       });
       console.log('From Server:', response);

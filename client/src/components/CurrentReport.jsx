@@ -17,7 +17,6 @@ const CurrentReport = ({ level, spot }) => {
   )
   const { getReport } = useReportHook()
 
-
   React.useEffect(() => {
     if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
       setFavorite(true)
@@ -44,7 +43,7 @@ const CurrentReport = ({ level, spot }) => {
           id: user._id,
           favorites: newArr,
         },
-        url: 'http://localhost:5000/updateFavorites',
+        url: `${process.env.REACT_APP_API_URL}/updateFavorites`,
         withCredentials: true,
       });
       console.log(response);
@@ -72,7 +71,7 @@ const CurrentReport = ({ level, spot }) => {
           id: user._id,
           favorites: newArr,
         },
-        url: 'http://localhost:5000/updateFavorites',
+        url: `${process.env.REACT_APP_API_URL}/updateFavorites`,
         withCredentials: true,
       });
       console.log(response);

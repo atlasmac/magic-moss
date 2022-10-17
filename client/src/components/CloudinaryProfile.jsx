@@ -36,7 +36,7 @@ const CloudinaryProfile = () => {
           profileImg: profileImg ? profileImg : user.profileImg,
           oldImg: user.profileImg,
         },
-        url: 'http://localhost:5000/updateUser',
+        url: `${process.env.REACT_APP_API_URL}/updateUser`,
         withCredentials: true,
       });
       setMsg({

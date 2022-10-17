@@ -17,7 +17,11 @@ require('dotenv').config({ path: './config/.env' });
 app.use(
 	cors({
 		credentials: true,
-		origin: 'http://localhost:3000',
+    origin: `${
+			process.env.NODE_ENV === 'production'
+				? 'https://magicmoss.herokuapp.com/'
+				: 'http://localhost:3000'
+		}`,
 	})
 );
 
@@ -37,17 +41,31 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 604800016 },
 	})
 );
+const path = require('path');
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+
+	app.use('/api/', mainRoutes);
+  app.use("api/comment", commentRoutes);
+  app.use("api/report", reportRoutes);
+
+	app.get('/*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+} else {
+//Setup Routes For Which The Server Is Listening
+  app.use('/', mainRoutes);
+  app.use("/comment", commentRoutes);
+  app.use("/report", reportRoutes);
+}
 
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-//Setup Routes For Which The Server Is Listening
-app.use('/', mainRoutes);
-app.use("/comment", commentRoutes);
-app.use("/report", reportRoutes);
 
 app.listen(process.env.PORT, () => {
 	console.log('Server is running, you better catch it!');

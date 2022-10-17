@@ -18,7 +18,7 @@ const DashboardTable = () => {
           data: {
             siteNumbers: favoriteNumbers,
           },
-          url: `http://localhost:5000/report/favoriteReport`,
+          url: `${process.env.REACT_APP_API_URL}/report/favoriteReport`,
           withCredentials: true,
         });
         setFavoriteData(response.data);

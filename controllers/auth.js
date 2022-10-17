@@ -185,7 +185,7 @@ module.exports = {
   updateFavorites: async (req, res) => {
     try {
       await User.findOneAndUpdate(
-        { _id: req.user.id },
+        { _id: req.session.passport.user.id },
         {
           favorites: req.body.favorites,
         },

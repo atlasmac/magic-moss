@@ -7,7 +7,7 @@ module.exports = {
         comment: req.body.comment,
         siteNumber: req.params.siteNumber,
         likes: 0,
-        user: req.user.id
+        user: req.session.passport.user
       });
       console.log("comment has been added");
       res.json({

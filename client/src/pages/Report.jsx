@@ -28,7 +28,7 @@ const Report = () => {
       try {
         const response = await axios({
           method: 'Get',
-          url: `http://localhost:5000/report/${siteNumber}`,
+          url: `${process.env.REACT_APP_API_URL}/report/${siteNumber}`,
           withCredentials: true,
         });
 

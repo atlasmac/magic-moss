@@ -11,14 +11,13 @@ const Comments = () => {
   const [commentsArr, setCommentsArr] = React.useState([]);
   const [getComments, setGetComments] = React.useState(false)
   const { siteNumber } = useParams();
-  console.log(user)
 
   React.useEffect(() => {
     (async () => {
       try {
         const response = await axios({
           method: 'Get',
-          url: `http://localhost:5000/comment/${siteNumber}`,
+          url: `${process.env.REACT_APP_API_URL}/comment/${siteNumber}`,
           withCredentials: true,
         });
         setCommentsArr(response.data)
@@ -34,7 +33,7 @@ const Comments = () => {
         const response = await axios({
           method: 'DELETE',
           data: { id: commentId },
-          url: 'http://localhost:5000/comment/deleteComment',
+          url: `${process.env.REACT_APP_API_URL}/comment/deleteComment`,
           withCredentials: true,
         });
         console.log('From Server:', response);
@@ -123,7 +122,7 @@ const Comments = () => {
           comment: formData.comment,
           likes: 0,
         },
-        url: `http://localhost:5000/comment/createComment/${siteNumber}`,
+        url: `${process.env.REACT_APP_API_URL}/comment/createComment/${siteNumber}`,
         withCredentials: true,
       });
       setGetComments(!getComments);
