@@ -58,7 +58,6 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
       </div>
       <div className="flex-1 px-2 lg:flex-none navbar-end md:navbar-start">
         <img src={logo} alt="logo" style={{ height: 30 }} />
-        {/* <NavLink to='/' className="text-lg font-bold">MagicMoss</NavLink> */}
       </div>
       <div className="flex justify-end flex-1 px-2 hidden md:flex">
         <div className="flex items-stretch">
