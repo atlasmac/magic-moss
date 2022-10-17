@@ -1,15 +1,15 @@
 export function getGif(siteNumber){
   //brennans
   if (siteNumber === '12340500'){
-    return '/gifs/brennans.gif'
+    return 'https://media.giphy.com/media/fUosIabrqmvvauUBgI/giphy.gif'
   }
   //zero
   if (siteNumber === '12354500'){
-    return '/gifs/zero.gif'
+    return 'https://media.giphy.com/media/7rpp0H7KwqDLVF9X5r/giphy.gif'
   }
   //pipeline
   if (siteNumber === '13337000'){
-    return '/gifs/lochsa.gif'
+    return 'https://media.giphy.com/media/lnchodno4E0Zw3V7VC/giphy-downsized-large.gif'
   }
-  return '/gifs/brennans-small.gif'
+  return 'https://media.giphy.com/media/fUosIabrqmvvauUBgI/giphy.gif'
 }
