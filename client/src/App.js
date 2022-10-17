@@ -6,6 +6,7 @@ import Header from './components/Header';
 import NoMatch from './pages/NoMatch';
 import Dashboard from './pages/Dashboard';
 import Report from './pages/Report'
+import FAQ from './pages/FAQ';
 
 const App = () => {
   const [showLogin, setShowLogin] = React.useState(false)
@@ -23,10 +24,10 @@ const App = () => {
           path='/'
           element={
             <Home
-            showLogin={showLogin}
-            setShowLogin={setShowLogin}
-            showSignUp={showSignUp}
-            setShowSignUp={setShowSignUp}
+              showLogin={showLogin}
+              setShowLogin={setShowLogin}
+              showSignUp={showSignUp}
+              setShowSignUp={setShowSignUp}
             />
           } />
         <Route
@@ -40,6 +41,10 @@ const App = () => {
             </RequireAuth>
           }
         />
+        <Route
+          path='/faq'
+          element={<FAQ />} 
+          />
         <Route path='*' element={<NoMatch />} />
       </Routes>
     </>

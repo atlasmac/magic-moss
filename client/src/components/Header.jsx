@@ -80,7 +80,7 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
               <li><NavLink to='/report/13337000'>Lunch Counter</NavLink></li>
             </ul>
           </div>
-          <NavLink to='/' className="btn btn-ghost rounded-btn">FAQ</NavLink>
+          <NavLink to='/faq' className="btn btn-ghost rounded-btn">FAQ</NavLink>
           {authed &&
             <NavLink to='/dashboard' className="btn btn-ghost rounded-btn">Dashboard</NavLink>
           }

@@ -162,7 +162,7 @@ const Comments = () => {
           <div className="max-w-screen-sm">
             <div>
               <form onSubmit={handleSubmit}>
-                <div className="form-control">
+                <div className="form-control pl-3 pr-3">
                   <textarea
                     className="textarea h-24 bg-base-100"
                     type="text"
