@@ -19,7 +19,7 @@ app.use(
 		credentials: true,
     origin: `${
 			process.env.NODE_ENV === 'production'
-				? 'https://magicmoss.herokuapp.com/'
+				? 'https://safe-castle-40765.herokuapp.com/'
 				: 'http://localhost:3000'
 		}`,
 	})
