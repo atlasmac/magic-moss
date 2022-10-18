@@ -52,7 +52,7 @@ function Login() {
         success: false,
       });
     }
-  };
+  }
 
   return (
     <div className=''>

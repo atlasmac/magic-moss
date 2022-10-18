@@ -10,11 +10,11 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
   const login = () => {
     setShowLogin(true)
     setShowSignUp(false)
-  }
+  };
   const signUp = () => {
     setShowLogin(false)
     setShowSignUp(true)
-  }
+  };
 
   return (
     <div className="navbar bg-base-300 rounded-box">

@@ -6,10 +6,10 @@ import useConditionHook from '../hooks/useConditionHook';
 
 const ForecastTable = ({ forecastData }) => {
   const { getConditions } = useConditionHook();
-  const { siteNumber } = useParams()
+  const { siteNumber } = useParams();
 
   const forecastDataNoon = forecastData.filter(data => {
-    let dateParts = data.date.split(' ')
+    let dateParts = data.date.split(' ');
     return dateParts[2] === '12:00' && dateParts[3] === 'AM';
   })
 
@@ -19,13 +19,13 @@ const ForecastTable = ({ forecastData }) => {
   const waveDescription = [];
 
   forecastDataNoon.forEach((data) => {
-    headers.push(<td key={data.date}>{data.date.split(' ')[0]}</td>)
-    flows.push(<td key={data.date}>{data.cfs}</td>)
-    height.push(<td key={data.date}>{data.ft}</td>)
-    waveDescription.push([data.cfs, +siteNumber])
+    headers.push(<td key={data.date}>{data.date.split(' ')[0]}</td>);
+    flows.push(<td key={data.date}>{data.cfs}</td>);
+    height.push(<td key={data.date}>{data.ft}</td>);
+    waveDescription.push([data.cfs, +siteNumber]);
   })
 
-  const conditionsTd = getConditions(waveDescription).map((el, i) => (<td key={`${i}${el}`}>{el}</td>))
+  const conditionsTd = getConditions(waveDescription).map((el, i) => (<td key={`${i}${el}`}>{el}</td>));
 
   return (
     <div>

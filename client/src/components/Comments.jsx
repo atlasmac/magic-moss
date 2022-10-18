@@ -9,7 +9,7 @@ import { Image } from 'cloudinary-react';
 const Comments = () => {
   const { user, authed } = useAuth();
   const [commentsArr, setCommentsArr] = React.useState([]);
-  const [getComments, setGetComments] = React.useState(false)
+  const [getComments, setGetComments] = React.useState(false);
   const { siteNumber } = useParams();
 
   React.useEffect(() => {
@@ -22,10 +22,10 @@ const Comments = () => {
         });
         setCommentsArr(response.data)
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     })();
-  }, [siteNumber, getComments])
+  }, [siteNumber, getComments]);
 
   async function deleteComment(commentId) {
     if (window.confirm('Are you sure you want to delete this comment?')) {

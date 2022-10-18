@@ -6,8 +6,8 @@ import useConditionHook from '../hooks/useConditionHook';
 
 const DashboardTable = () => {
   const { user, getUser, setGetUser } = useAuth();
-  const [favoriteData, setFavoriteData] = useState([])
-  const [favoriteNumbers, setFavoriteNumbers] = useState(user.favorites.map(el => el.siteNumber))
+  const [favoriteData, setFavoriteData] = useState([]);
+  const [favoriteNumbers, setFavoriteNumbers] = useState(user.favorites.map(el => el.siteNumber));
   const { getConditions } = useConditionHook();
 
   React.useEffect(() => {
@@ -32,12 +32,12 @@ const DashboardTable = () => {
   let currentFlows = [];
   let conditions = [];
   favoriteData.forEach((data, i) => {
-    console.log(data.observed[data.observed.length - 1].cfs, data.siteNumber)
-    waves.push(<li key={`${i}${data.date}`} className={`text text-sm h-10 md:text-lg`} ><NavLink className={'link-accent'} to={`/report/${data.siteNumber}`}>{data.wave}</NavLink></li>)
-    currentFlows.push(<li key={`${i}${data.date}`} className={`text-sm h-10 md:text-lg`} >{data.observed[data.observed.length - 1].cfs} CFS</li>)
-    conditions.push([data.observed[data.observed.length - 1].cfs, data.siteNumber])
+    console.log(data.observed[data.observed.length - 1].cfs, data.siteNumber);
+    waves.push(<li key={`${i}${data.date}`} className={`text text-sm h-10 md:text-lg`} ><NavLink className={'link-accent'} to={`/report/${data.siteNumber}`}>{data.wave}</NavLink></li>);
+    currentFlows.push(<li key={`${i}${data.date}`} className={`text-sm h-10 md:text-lg`} >{data.observed[data.observed.length - 1].cfs} CFS</li>);
+    conditions.push([data.observed[data.observed.length - 1].cfs, data.siteNumber]);
   });
-  const conditionsLi = getConditions(conditions).map((el, i) => (<li className={`text-sm h-10 md:text-lg`} key={i}>{el}</li>))
+  const conditionsLi = getConditions(conditions).map((el, i) => (<li className={`text-sm h-10 md:text-lg`} key={i}>{el}</li>));
 
   return (
     <div>

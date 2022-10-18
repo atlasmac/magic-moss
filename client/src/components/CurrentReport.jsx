@@ -11,32 +11,32 @@ import { getLocation } from '../helpers/getLocation';
 
 
 const CurrentReport = ({ level, spot }) => {
-  const { siteNumber } = useParams()
-  const { user, authed } = useAuth()
+  const { siteNumber } = useParams();
+  const { user, authed } = useAuth();
   const [favorite, setFavorite] = React.useState(
     (user.favorites?.some(e => e.siteNumber == siteNumber)) ? true : false
   )
-  const { getReport } = useReportHook()
+  const { getReport } = useReportHook();
 
   React.useEffect(() => {
     if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
-      setFavorite(true)
+      setFavorite(true);
     }
     else {
-      setFavorite(false)
+      setFavorite(false);
     }
-  }, [siteNumber, user.favorites, spot])
+  }, [siteNumber, user.favorites, spot]);
 
 
   const addFavorite = async event => {
-    let newArr
+    let newArr;
     if (user.favorites) {
-      user.favorites.push({ siteNumber: siteNumber, wave: spot })
-      newArr = [...new Set(user.favorites)]
+      user.favorites.push({ siteNumber: siteNumber, wave: spot });
+      newArr = [...new Set(user.favorites)];
     } else {
-      newArr = [{ siteNumber: siteNumber, wave: spot }]
+      newArr = [{ siteNumber: siteNumber, wave: spot }];
     }
-    setFavorite(!favorite)
+    setFavorite(!favorite);
     try {
       const response = await axios({
         method: 'PUT',
@@ -50,9 +50,9 @@ const CurrentReport = ({ level, spot }) => {
       console.log(response);
 
       if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
-        setFavorite(true)
+        setFavorite(true);
       } else {
-        setFavorite(false)
+        setFavorite(false);
       }
     } catch (err) {
       console.log(err);
@@ -60,11 +60,11 @@ const CurrentReport = ({ level, spot }) => {
   };
 
   async function handleDelete() {
-    const index = user.favorites.map(e => e.siteNumber).indexOf(siteNumber)
-    console.log(index)
+    const index = user.favorites.map(e => e.siteNumber).indexOf(siteNumber);
+    console.log(index);
     user.favorites.splice(index, 1);
-    let newArr = user.favorites
-    setFavorite(!favorite)
+    let newArr = user.favorites;
+    setFavorite(!favorite);
     try {
       const response = await axios({
         method: 'PUT',
@@ -78,18 +78,18 @@ const CurrentReport = ({ level, spot }) => {
       console.log(response);
 
       if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
-        setFavorite(true)
+        setFavorite(true);
       } else {
-        setFavorite(false)
+        setFavorite(false);
       }
     } catch (err) {
       console.log(err);
     }
   }
 
-  const currentLevel = level.cfs
-  const currentFeet = level.ft
-  const time = level.date
+  const currentLevel = level.cfs;
+  const currentFeet = level.ft;
+  const time = level.date;
   return (
     <div className="hero min-h-fit bg-base-200 mt-8 ">
       <div className="hero-content flex-col lg:flex-row">
