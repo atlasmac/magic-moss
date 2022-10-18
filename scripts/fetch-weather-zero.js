@@ -10,8 +10,7 @@ const fetch = async (...args) => {
   return (await fetchP).default(...args); 
 }
 async function fetchWeather(){
-
-  const writeFile = promisify(fs.writeFile);
+  // const writeFile = promisify(fs.writeFile);
 
   const res = await fetch(
     'https://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=srgm8&output=xml'
