@@ -91,9 +91,9 @@ const CurrentReport = ({ level, spot }) => {
   const currentFeet = level.ft;
   const time = level.date;
   return (
-    <div className="hero min-h-fit bg-base-200 mt-8 ">
+    <div className="hero min-h-fit bg-base-200 mt-8">
       <div className="hero-content flex-col lg:flex-row">
-        <img src={getGif(siteNumber)} alt="surfing gif" className="max-w-sm rounded-lg shadow-2xl" />
+        <img src={getGif(siteNumber)} alt="surfing gif" className="max-w-xs rounded-lg shadow-2xl md:max-w-sm" />
         <div className='flex flex-col items-center lg:items-start'>
           {authed && <div className='w-full flex justify-end h-16'>
             {favorite && <div className='flex flex-col items-center'>
