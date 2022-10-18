@@ -110,7 +110,7 @@ const CurrentReport = ({ level, spot }) => {
               <p>Add to favorites</p>
             </div>}
           </div>}
-          <h1 className=" py-3 text-5xl font-robotoSlab font-bold ">{spot}</h1>
+          <h1 className=" py-3 text-5xl font-robotoSlab font-bold text-center sm:text-left">{spot}</h1>
           
           <p className="py-3 text-3xl max-w-80"><a href="https://www.google.com/maps" target={'_blank'} rel="noreferrer" className='flex items-center gap-x-2 hover:text-slate-200'><BiMap /> Location</a></p>
           <p className="py-3 text-3xl max-w-80"><span className='font-bold'>Range of surfable flows: </span>~{getRange(siteNumber)} cfs</p>
