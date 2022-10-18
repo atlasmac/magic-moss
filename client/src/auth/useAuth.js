@@ -53,6 +53,7 @@ function useAuth() {
 				setAuthed(false);
 				setUser(null);
 				navigate('/');
+        window.location.reload();
 			} catch (err) {
 				console.log(err);
 			}
