@@ -4,6 +4,7 @@ const fs = require('fs');
 const { promisify } = require('util');
 const siteNumber = 13337000;
 const site = "Lochsa's Pipeline";
+const axios = require('axios');
 
 const fetch = async (...args) => {
   return (await fetchP).default(...args); 
@@ -39,9 +40,25 @@ async function fetchWeather(){
   });
   // console.log(data);
   await writeFile('data/weatherLochsa.json', JSON.stringify({ siteNumber, wave : site, observed, forecast }, null, 2));
+  const updateWeather = async event => {
+    try {
+      const response = await axios({
+        method: 'PUT',
+        data: {
+          siteNumber: siteNumber,
+          wave: site,
+          observed: observed,
+          forecast: forecast,
+        },
+        url: `https://safe-castle-40765.herokuapp.com/api/report/updateReport/${siteNumber}`,
+        withCredentials: true,
+      });
+    }		catch (err) {
+      console.log(err);
+    }
+  }
+  (async () => await updateWeather())();
   return data;
 };
-
-// setInterval(fetchWeather, 10000)
 
 (async () => await fetchWeather())();

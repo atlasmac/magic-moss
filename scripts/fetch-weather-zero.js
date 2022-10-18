@@ -11,7 +11,6 @@ const fetch = async (...args) => {
 }
 async function fetchWeather(){
 
-
   const writeFile = promisify(fs.writeFile);
 
   const res = await fetch(
@@ -40,27 +39,25 @@ async function fetchWeather(){
   });
   // console.log(data);
   await writeFile('data/weatherStRegis.json', JSON.stringify({ siteNumber, wave : site, observed, forecast }, null, 2));
-
+  const updateWeather = async event => {
+    try {
+      const response = await axios({
+        method: 'PUT',
+        data: {
+          siteNumber: siteNumber,
+          wave: site,
+          observed: observed,
+          forecast: forecast,
+        },
+        url: `https://safe-castle-40765.herokuapp.com/api/report/updateReport/${siteNumber}`,
+        withCredentials: true,
+      });
+    }		catch (err) {
+      console.log(err);
+    }
+  }
+  (async () => await updateWeather())();
   return data;
 };
-
-// setInterval(fetchWeather, 10000)
-// const updateReport = async event => {
-//   try {
-//     const response = await axios({
-//       method: 'PUT',
-//       data: {
-//         siteNumber: siteNumber,
-//         wave: site,
-//         observed: observed,
-//         forecast: forecast,
-//       },
-//       url: `http://localhost:5000/report/updateReport/${siteNumber}`,
-//       withCredentials: true,
-//     });
-//   }		catch (err) {
-//     console.log(err);
-//   }
-// }
 
 (async () => await fetchWeather())();
