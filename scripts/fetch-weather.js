@@ -39,7 +39,7 @@ async function fetchWeather(){
     };
   });
   // console.log(data);
-  await writeFile('data/weatherMissoula.json', JSON.stringify({ siteNumber, wave : site, observed, forecast }, null, 2));
+  // await writeFile('data/weatherMissoula.json', JSON.stringify({ siteNumber, wave : site, observed, forecast }, null, 2));
   const updateWeather = async event => {
     try {
       const response = await axios({
