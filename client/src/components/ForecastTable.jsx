@@ -28,12 +28,12 @@ const ForecastTable = ({ forecastData }) => {
   const conditionsTd = getConditions(waveDescription).map((el, i) => (<td key={`${i}${el}`}>{el}</td>))
 
   return (
-    <>
+    <div>
       <div className='flex justify-center'>
         <h2 className='text-3xl font-robotoSlab font-bold'>Daily Forecast Levels</h2>
       </div>
-      <div className="overflow-x-auto scrollbar-thin scrollbar-corner-full scrollbar-thumb-slate-400 scrollbar-thumb-rounded-md scrollbar-track-base-200 overflow-scroll mt-3">
-        <table className="table w-full">
+      <div className="overflow-x-auto scrollbar-thin scrollbar-corner-full scrollbar-thumb-slate-400 scrollbar-thumb-rounded-md scrollbar-track-base-200 overflow-scroll mt-3 pb-1">
+        <table className="table w-full mb-1">
           <thead>
             <tr>
               <th></th>
@@ -56,7 +56,7 @@ const ForecastTable = ({ forecastData }) => {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   )
 }
 

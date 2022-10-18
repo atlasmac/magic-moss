@@ -42,8 +42,8 @@ const Report = () => {
               ft: data.ft,
             }
           })
-        const filterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 10 === 0)
-        const mobileFilterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i % 18 === 0)
+        const filterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i === 0 || i % 10 === 0)
+        const mobileFilterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i === 0 || i % 30 === 0)
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
         const forecastData = riverData.forecast
           .sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -54,7 +54,7 @@ const Report = () => {
               ft: data.ft
             }
           })
-        const mobileForecastData = forecastData.filter((el, i, arr) => i === (arr.length - 2) || i === 0 || i % 3 === 0)
+        const mobileForecastData = forecastData.filter((el, i, arr) => i === (arr.length - 1) || i === 0 || i % 3 === 0)
 
         setForecastData(forecastData)
         setLastObserved(lastObserved[0])
@@ -172,7 +172,6 @@ const Report = () => {
           },
         },
         labels: {
-          boxHeight: 30,
       
           color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
           // fontSize: 18  // not 'fontSize:' anymore
@@ -188,6 +187,7 @@ const Report = () => {
     maintainAspectRatio: false,
     scales: {
       y: {
+        suggestedMin: 0,
         ticks: {
           color: 'rgb(166, 173, 186)',
           font: {
@@ -226,7 +226,7 @@ const Report = () => {
           color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
           // fontSize: 18  // not 'fontSize:' anymore
           font: {
-            size: 17, // 'size' now within object 'font {}'
+            size: 14, // 'size' now within object 'font {}'
             
           },
           
@@ -242,6 +242,7 @@ const Report = () => {
     maintainAspectRatio: false,
     scales: {
       y: {
+        suggestedMin: 0,
         ticks: {
           color: 'rgb(166, 173, 186)',
           font: {
@@ -258,7 +259,7 @@ const Report = () => {
           font: {
             size: 18 // 'size' now within object 'font {}'
           },
-          maxTicksLimit: 9
+          maxTicksLimit: 8
         }
       }
     }
