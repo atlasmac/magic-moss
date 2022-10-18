@@ -19,6 +19,7 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
   return (
     <div className="navbar bg-base-300 rounded-box">
       <div className="navbar-start md:hidden">
+        {/* MObile menu */}
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <HiMenu className="h-6 w-6"></HiMenu>
@@ -30,7 +31,9 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
             {!authed &&
               <li><Link to='/' onClick={login} className="btn btn-ghost rounded-btn">Log in</Link></li>
             }
-            {/* <li><Link to='/' className="btn btn-ghost rounded-btn">Home</Link></li> */}
+            {!authed &&
+              <li><Link to='/' onClick={signUp} className="btn btn-ghost rounded-btn">Sign up</Link></li>
+            }
             <li tabIndex={0}>
               <span className="btn btn-ghost rounded-btn" >Surf Reports</span>
               <ul className="bg-base-100 p-2">
@@ -61,6 +64,7 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
       </div>
       <div className="flex justify-end flex-1 px-2 hidden md:flex">
         <div className="flex items-stretch">
+          {/* desktop menu */}
           <div className="dropdown dropdown-start">
             <label tabIndex={0} className="btn btn-ghost rounded-btn">Reports</label>
             <ul tabIndex={0} className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
