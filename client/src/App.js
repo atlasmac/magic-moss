@@ -9,7 +9,7 @@ import Report from './pages/Report'
 import FAQ from './pages/FAQ';
 
 const App = () => {
-  const [showLogin, setShowLogin] = React.useState(false)
+  const [showLogin, setShowLogin] = React.useState(true)
   const [showSignUp, setShowSignUp] = React.useState(false)
   return (
     <>
@@ -32,7 +32,14 @@ const App = () => {
           } />
         <Route
           path='/report/:siteNumber'
-          element={<Report />} />
+          element={
+          <Report 
+            showLogin={showLogin}
+            setShowLogin={setShowLogin}
+            showSignUp={showSignUp}
+            setShowSignUp={setShowSignUp}
+          />
+          } />
         <Route
           path='/dashboard'
           element={

@@ -9,7 +9,7 @@ import Comments from '../components/Comments';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
-const Report = () => {
+const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
   const { siteNumber } = useParams();
   const [riverDataObj, setriverDataObj] = useState([]);
   const [spot, setSpot] = useState('');
@@ -44,11 +44,10 @@ const Report = () => {
 
         const testObservedFilter = observedData.filter((data, i ) => {
           let dateParts = data.date.split(' ');
-          if (dateParts[2] === '12:00' || dateParts[2] === '6:00') {
+          if (dateParts[2] === '12:00' || dateParts[2] === '6:00' || (i === (observedData.length - 1)) ) {
             return dateParts;
-          } else if (i === (observedData.length - i)){
-            return data;
           }
+          return null;
         })
 
         const forecastData = riverData.forecast
@@ -60,7 +59,6 @@ const Report = () => {
               ft: data.ft
             }
           })
-        const labels = [...testObservedFilter, ...lastObserved, ...forecastData]
         setForecastData(forecastData)
         setLastObserved(lastObserved[0])
         setriverDataObj(riverData);
@@ -75,6 +73,7 @@ const Report = () => {
               borderColor: "rgb(152, 168, 248)",
               borderWidth: 2,
               pointRadius: 0,
+              pointHoverRadius: 5,
               tension: 0.5,
               parsing: {
                 xAxisKey: 'date',
@@ -102,6 +101,7 @@ const Report = () => {
               borderColor: "rgb(205, 252, 246)",
               borderWidth: 2,
               pointRadius: 0,
+              pointHoverRadius: 5,
               tension: .5,
               parsing: {
                 xAxisKey: 'date',
@@ -161,7 +161,7 @@ const Report = () => {
                 callback: function(value, index, ticks) {
                   return this.getLabelForValue(value)
                     .split(' ')
-                    .filter((el, i)=> i === 0 || i === 1)
+                    .filter((el, i)=> i === 0 )
               }
               }
             }
@@ -190,7 +190,11 @@ const Report = () => {
             <LineChart chartData={graphData} chartOptions={lineOptions} />
           </div>
           <ForecastTable forecastData={forecastData} />
-          <Comments />
+          <Comments 
+            showLogin={showLogin}
+            setShowLogin={setShowLogin}
+            showSignUp={showSignUp}
+            setShowSignUp={setShowSignUp}/>
         </div>
 
       }

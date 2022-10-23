@@ -35,7 +35,7 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
               <li><Link to='/' onClick={signUp} className="btn btn-ghost rounded-btn">Sign up</Link></li>
             }
             <li tabIndex={0}>
-              <span className="btn btn-ghost rounded-btn" >Surf Reports</span>
+              <span className="btn btn-ghost rounded-btn">Surf Reports</span>
               <ul className="bg-base-100 p-2">
                 <li className="menu-title">
                   <span>Montana</span>
@@ -60,7 +60,9 @@ export default function Header({ showLogin, setShowLogin, setShowSignUp, showSig
         </div>
       </div>
       <div className="flex-1 px-2 lg:flex-none navbar-end md:navbar-start">
-        <img src={logo} alt="logo" style={{ height: 30 }} />
+        <Link to='/'>
+          <img src={logo} alt="logo" style={{ height: 30 }} />
+        </Link>
       </div>
       <div className="flex justify-end flex-1 px-2 hidden md:flex">
         <div className="flex items-stretch">
