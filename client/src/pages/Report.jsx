@@ -9,7 +9,7 @@ import Comments from '../components/Comments';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
-const Report = () => {
+const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
   const { siteNumber } = useParams();
   const [riverDataObj, setriverDataObj] = useState([]);
   const [spot, setSpot] = useState('');
@@ -19,9 +19,7 @@ const Report = () => {
   const [graphData, setGraphData] = useState({
     datasets: [{ data: 0 }, { data: 0 }, { data: 0 }]
   })
-  const [mobileGraphData, setMobileGraphData] = useState({
-    datasets: [{ data: 0 }, { data: 0 }, { data: 0 }]
-  })
+  const [lineOptions, setLineOptions] = useState()
 
   React.useEffect(() => {
     (async () => {
@@ -42,9 +40,16 @@ const Report = () => {
               ft: data.ft,
             }
           })
-        const filterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i === 0 || i % 10 === 0)
-        const mobileFilterObservedData = observedData.filter((el, i, arr) => i === (arr.length - 2) || i === 0 || i % 30 === 0)
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
+
+        const testObservedFilter = observedData.filter((data, i ) => {
+          let dateParts = data.date.split(' ');
+          if (dateParts[2] === '12:00' || dateParts[2] === '6:00' || (i === (observedData.length - 1)) ) {
+            return dateParts;
+          }
+          return null;
+        })
+
         const forecastData = riverData.forecast
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map(data => {
@@ -54,8 +59,6 @@ const Report = () => {
               ft: data.ft
             }
           })
-        const mobileForecastData = forecastData.filter((el, i, arr) => i === (arr.length - 1) || i === 0 || i % 3 === 0)
-
         setForecastData(forecastData)
         setLastObserved(lastObserved[0])
         setriverDataObj(riverData);
@@ -65,12 +68,13 @@ const Report = () => {
           datasets: [
             {
               label: ["Observed"],
-              data: filterObservedData,
+              data: testObservedFilter,
               backgroundColor: ["rgb(152, 168, 248)"],
               borderColor: "rgb(152, 168, 248)",
               borderWidth: 2,
-              pointRadius: 5,
-              tension: .6,
+              pointRadius: 0,
+              pointHoverRadius: 5,
+              tension: 0.5,
               parsing: {
                 xAxisKey: 'date',
                 yAxisKey: 'cfs'
@@ -78,9 +82,9 @@ const Report = () => {
             }, {
               label: ["Current"],
               data: lastObserved,
-              backgroundColor: ["rgb(83, 191, 157)"],
-              borderColor: "rgb(83, 191, 157)",
-              borderWidth: 8,
+              backgroundColor: ["red"],
+              borderColor: "red",
+              borderWidth: 2,
               pointRadius: 9,
               pointHoverBorderWidth: 9,
               pointStyle: 'star',
@@ -96,8 +100,9 @@ const Report = () => {
               backgroundColor: ["rgb(205, 252, 246)"],
               borderColor: "rgb(205, 252, 246)",
               borderWidth: 2,
-              pointRadius: 5,
-              tension: .6,
+              pointRadius: 0,
+              pointHoverRadius: 5,
+              tension: .5,
               parsing: {
                 xAxisKey: 'date',
                 yAxisKey: 'cfs'
@@ -106,51 +111,63 @@ const Report = () => {
             }
           ]
         })
-        setMobileGraphData({
-          datasets: [
-            {
-              label: ["Observed"],
-              data: mobileFilterObservedData,
-              backgroundColor: ["rgb(152, 168, 248)"],
-              borderColor: "rgb(152, 168, 248)",
-              borderWidth: 2,
-              pointRadius: 5,
-              tension: .6,
-              parsing: {
-                xAxisKey: 'date',
-                yAxisKey: 'cfs'
+        const options = {
+          plugins: {
+            legend: {
+              title: {
+                display: true,
+                text: 'Cubic Feet per Second (cfs)',
+                color: "rgb(166, 173, 186)",
+                font: {
+                  size: 36,
+                  family: "'Roboto Slab', Times, serif",
+                },
+              },
+              labels: {
+                color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
+                // fontSize: 18  // not 'fontSize:' anymore
+                font: {
+                  size: 20 // 'size' now within object 'font {}'
+                }
               }
-            }, {
-              label: ["Current"],
-              data: lastObserved,
-              backgroundColor: ["rgb(83, 191, 157)"],
-              borderColor: "rgb(83, 191, 157)",
-              borderWidth: 8,
-              pointRadius: 9,
-              pointHoverBorderWidth: 9,
-              pointStyle: 'star',
-              parsing: {
-                xAxisKey: 'date',
-                yAxisKey: 'cfs'
-              }
-
             },
-            {
-              label: ["Forecasted"],
-              data: mobileForecastData,
-              backgroundColor: ["rgb(205, 252, 246)"],
-              borderColor: "rgb(205, 252, 246)",
-              borderWidth: 2,
-              pointRadius: 5,
-              tension: .6,
-              parsing: {
-                xAxisKey: 'date',
-                yAxisKey: 'cfs'
-              }
-
+            tooltip: {
+              intersect: false
             }
-          ]
-        })
+          },
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              suggestedMin: 0,
+              ticks: {
+                color: 'rgb(166, 173, 186)',
+                font: {
+                  size: 16 
+                }
+              },
+              grid: {
+                color: "rgba(0, 0, 0, 0)"
+              }
+            },
+            x: {
+              ticks: {
+                color: 'rgb(166, 173, 186)',
+                font: {
+                  size: 14 
+                },
+                maxTicksLimit: 11,
+                maxRotation: 0,
+                minRotation: 0,
+                callback: function(value, index, ticks) {
+                  return this.getLabelForValue(value)
+                    .split(' ')
+                    .filter((el, i)=> i === 0 )
+              }
+              }
+            }
+          }
+        }
+        setLineOptions(options);
 
       } catch (err) {
         console.log(err)
@@ -158,112 +175,7 @@ const Report = () => {
     })();
   }, [siteNumber])
 
-  const lineOptions = {
-    plugins: {
- 
-      legend: {
-        title: {
-          display: true,
-          text: 'Cubic Feet per Second (cfs)',
-          color: "rgb(166, 173, 186)",
-          font: {
-            size: 36,
-            family: "'Roboto Slab', Times, serif",
-          },
-        },
-        labels: {
-      
-          color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
-          // fontSize: 18  // not 'fontSize:' anymore
-          font: {
-            size: 30 // 'size' now within object 'font {}'
-          }
-        }
-      },
-      tooltip: {
-        intersect: false
-      }
-    },
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        suggestedMin: 0,
-        ticks: {
-          color: 'rgb(166, 173, 186)',
-          font: {
-            size: 18 // 'size' now within object 'font {}'
-          }
-        },
-        grid: {
-          color: "rgba(0, 0, 0, 0)"
-        }
-      },
-      x: {
-        ticks: {
-          color: 'rgb(166, 173, 186)',
-          font: {
-            size: 18 // 'size' now within object 'font {}'
-          },
-          maxTicksLimit: 17
-        }
-      }
-    }
-  }
-  const mobileLineOptions = {
-    plugins: {
-      legend: {
-        title: {
-          display: true,
-          text: 'Cubic Feet per Second (cfs)',
-          color: "rgb(166, 173, 186)",
-          font: {
-            size: 30,
-            family: "'Roboto Slab', Times, serif",
-          },
-        },
-        position: 'top',
-        labels: {
-          color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
-          // fontSize: 18  // not 'fontSize:' anymore
-          font: {
-            size: 14, // 'size' now within object 'font {}'
-            
-          },
-          
-          padding: 20,
 
-        },
-      
-      },
-      tooltip: {
-        intersect: false
-      }
-    },
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        suggestedMin: 0,
-        ticks: {
-          color: 'rgb(166, 173, 186)',
-          font: {
-            size: 18 // 'size' now within object 'font {}'
-          }
-        },
-        grid: {
-          color: "rgba(0, 0, 0, 0)"
-        }
-      },
-      x: {
-        ticks: {
-          color: 'rgb(166, 173, 186)',
-          font: {
-            size: 18 // 'size' now within object 'font {}'
-          },
-          maxTicksLimit: 8
-        }
-      }
-    }
-  }
 
   return (
     <div className='container mx-auto'>
@@ -274,14 +186,15 @@ const Report = () => {
       {forecastData.length > 1 &&
         <div>
           <CurrentReport spot={spot} level={lastObserved} />
-          <div className='hidden lg:block'>
+          <div className='block'>
             <LineChart chartData={graphData} chartOptions={lineOptions} />
           </div>
-          <div className='block lg:hidden'>
-            <LineChart chartData={mobileGraphData} chartOptions={mobileLineOptions} />
-          </div>
           <ForecastTable forecastData={forecastData} />
-          <Comments />
+          <Comments 
+            showLogin={showLogin}
+            setShowLogin={setShowLogin}
+            showSignUp={showSignUp}
+            setShowSignUp={setShowSignUp}/>
         </div>
 
       }
