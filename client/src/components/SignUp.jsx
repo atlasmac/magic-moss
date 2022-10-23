@@ -53,7 +53,7 @@ function SignUp() {
 
   return (
     <div >
-      <div className='flex justify-center p-8'>
+      <div className='flex justify-center p-3'>
 
       </div>
       <form onSubmit={handleSubmit} className='flex flex-col gap-2 w-full items-center'>

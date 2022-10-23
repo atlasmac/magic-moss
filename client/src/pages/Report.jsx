@@ -19,7 +19,7 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
   const [graphData, setGraphData] = useState({
     datasets: [{ data: 0 }, { data: 0 }, { data: 0 }]
   })
-  const [lineOptions, setLineOptions] = useState()
+  
 
   React.useEffect(() => {
     (async () => {
@@ -111,71 +111,124 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
             }
           ]
         })
-        const options = {
-          plugins: {
-            legend: {
-              title: {
-                display: true,
-                text: 'Cubic Feet per Second (cfs)',
-                color: "rgb(166, 173, 186)",
-                font: {
-                  size: 36,
-                  family: "'Roboto Slab', Times, serif",
-                },
-              },
-              labels: {
-                color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
-                // fontSize: 18  // not 'fontSize:' anymore
-                font: {
-                  size: 20 // 'size' now within object 'font {}'
-                }
-              }
-            },
-            tooltip: {
-              intersect: false
-            }
-          },
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              suggestedMin: 0,
-              ticks: {
-                color: 'rgb(166, 173, 186)',
-                font: {
-                  size: 16 
-                }
-              },
-              grid: {
-                color: "rgba(0, 0, 0, 0)"
-              }
-            },
-            x: {
-              ticks: {
-                color: 'rgb(166, 173, 186)',
-                font: {
-                  size: 14 
-                },
-                maxTicksLimit: 11,
-                maxRotation: 0,
-                minRotation: 0,
-                callback: function(value, index, ticks) {
-                  return this.getLabelForValue(value)
-                    .split(' ')
-                    .filter((el, i)=> i === 0 )
-              }
-              }
-            }
-          }
-        }
-        setLineOptions(options);
-
       } catch (err) {
         console.log(err)
       }
     })();
   }, [siteNumber])
 
-
+  const lineOptions = {
+    plugins: {
+      legend: {
+        title: {
+          display: true,
+          text: 'Cubic Feet per Second (cfs)',
+          color: "rgb(166, 173, 186)",
+          font: {
+            size: 36,
+            family: "'Roboto Slab', Times, serif",
+          },
+        },
+        labels: {
+          color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
+          // fontSize: 18  // not 'fontSize:' anymore
+          font: {
+            size: 20 // 'size' now within object 'font {}'
+          }
+        }
+      },
+      tooltip: {
+        intersect: false
+      }
+    },
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        suggestedMin: 0,
+        ticks: {
+          color: 'rgb(166, 173, 186)',
+          font: {
+            size: 16 
+          }
+        },
+        grid: {
+          color: "rgba(0, 0, 0, 0)"
+        }
+      },
+      x: {
+        ticks: {
+          color: 'rgb(166, 173, 186)',
+          font: {
+            size: 16 
+          },
+          maxTicksLimit: 11,
+          maxRotation: 0,
+          minRotation: 0,
+          callback: function(value, index, ticks) {
+            return this.getLabelForValue(value)
+              .split(' ')
+              .filter((el, i)=> i === 0 )
+        }
+        }
+      }
+    }
+  }
+  const mobileLineOptions = {
+    plugins: {
+      legend: {
+        title: {
+          display: true,
+          text: 'Cubic Feet per Second (cfs)',
+          color: "rgb(166, 173, 186)",
+          font: {
+            size: 26,
+            family: "'Roboto Slab', Times, serif",
+          },
+        },
+        labels: {
+          color: "rgb(166, 173, 186)",  // not 'fontColor:' anymore
+          // fontSize: 18  // not 'fontSize:' anymore
+          font: {
+            size: 14 // 'size' now within object 'font {}'
+          }
+        }
+      },
+      tooltip: {
+        intersect: false
+      }
+    },
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        suggestedMin: 0,
+        ticks: {
+          color: 'rgb(166, 173, 186)',
+          font: {
+            size: 14 
+          }
+        },
+        grid: {
+          color: "rgba(0, 0, 0, 0)"
+        }
+      },
+      x: {
+        ticks: {
+          color: 'rgb(166, 173, 186)',
+          font: {
+            size: 12
+          },
+          maxTicksLimit: 11,
+          maxRotation: 0,
+          minRotation: 0,
+          callback: function(value, index, ticks) {
+            return this.getLabelForValue(value)
+              .split(' ')
+              .filter((el, i)=> i === 0 )
+        }
+        }
+      }
+    }
+  }
 
   return (
     <div className='container mx-auto'>
@@ -186,8 +239,11 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
       {forecastData.length > 1 &&
         <div>
           <CurrentReport spot={spot} level={lastObserved} />
-          <div className='block'>
+          <div className='hidden lg:block'>
             <LineChart chartData={graphData} chartOptions={lineOptions} />
+          </div>
+          <div className='block lg:hidden'>
+            <LineChart chartData={graphData} chartOptions={mobileLineOptions} />
           </div>
           <ForecastTable forecastData={forecastData} />
           <Comments 

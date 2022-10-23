@@ -56,7 +56,7 @@ function Login() {
 
   return (
     <div className=''>
-      <div className='flex justify-center p-8'>
+      <div className='flex justify-center p-3'>
       {/* <h1 className='text-2xl'>Welcome Back!</h1> */}
 
       </div>

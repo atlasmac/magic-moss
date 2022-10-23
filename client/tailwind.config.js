@@ -9,6 +9,9 @@ module.exports = {
         'screen-70': '70vh',
         'screen-90': '90vh'
       },
+      minHeight:{
+        'screen-95': '95vh'
+      },
       height:{
         'screen-70': '70vh',
         'screen-90': '90vh'

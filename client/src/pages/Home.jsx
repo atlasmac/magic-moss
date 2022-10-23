@@ -18,14 +18,13 @@ function Home({ showLogin, setShowLogin, setShowSignUp, showSignUp }) {
   
   return (
     <div>
-      <div className="hero custom-90vh" style={{ backgroundImage: `url('${background}')` }}>
+      <div className="hero min-h-screen-95" style={{ backgroundImage: `url('${background}')` }}>
         <div className="hero-overlay bg-opacity-70"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-robotoSlab font-bold">Welcome to Magic Moss</h1>
-            <p className="mb-5 text-2xl">View current surf reports and forecasted conditions. Share images and interact with your surfing community.</p>
-
-            <div className='custom-40vh'>
+            <h1 className="mb-5 text-4xl font-robotoSlab font-bold md:text-5xl">Welcome to Magic Moss</h1>
+            <p className="mb-5 text-xl md:text-2xl">View current surf reports and forecasted conditions. Share images and interact with your surfing community.</p>
+            <div className='md:custom-40vh'>
               {!authed && showLogin && <div>
                 <Login />
                 <div className='flex flex-col items-center gap-y-3 pt-6'>
