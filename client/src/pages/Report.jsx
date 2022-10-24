@@ -6,7 +6,7 @@ import ForecastTable from '../components/ForecastTable';
 import CurrentReport from '../components/CurrentReport';
 import Loading from '../components/Loading';
 import Comments from '../components/Comments';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
@@ -20,7 +20,6 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
     datasets: [{ data: 0 }, { data: 0 }, { data: 0 }]
   })
   
-
   React.useEffect(() => {
     (async () => {
       try {
@@ -167,7 +166,26 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
           callback: function(value, index, ticks) {
             return this.getLabelForValue(value)
               .split(' ')
-              .filter((el, i)=> i === 0 )
+              .filter((el, i)=> {
+                return i === 0 || i === 1 }
+              )
+              .map((el, i) => {
+                return i === 1 ? el.split('/')[1] : el;
+              })
+              .map(el => {
+                const strTest = /^[a-zA-Z]+$/
+                if (strTest.test(el)){
+                  return el
+                } else if (el[el.length - 1] === '1'){
+                  return `${el}st`
+                } else if (el[el.length - 1] === '2'){
+                  return `${el}nd`
+                } else if (el[el.length - 1] === '3'){
+                  return `${el}rd`
+                } else {
+                  return `${el}th`
+                }
+              })
         }
         }
       }
@@ -223,7 +241,26 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
           callback: function(value, index, ticks) {
             return this.getLabelForValue(value)
               .split(' ')
-              .filter((el, i)=> i === 0 )
+              .filter((el, i)=> {
+                return i === 0 || i === 1 }
+              )
+              .map((el, i) => {
+                return i === 1 ? el.split('/')[1] : el;
+              })
+              .map(el => {
+                const strTest = /^[a-zA-Z]+$/
+                if (strTest.test(el)){
+                  return el
+                } else if (el[el.length - 1] === '1'){
+                  return `${el}st`
+                } else if (el[el.length - 1] === '2'){
+                  return `${el}nd`
+                } else if (el[el.length - 1] === '3'){
+                  return `${el}rd`
+                } else {
+                  return `${el}th`
+                }
+              })
         }
         }
       }
