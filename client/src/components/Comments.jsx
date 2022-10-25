@@ -158,7 +158,7 @@ const Comments = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
       <div className='antialiased mx-auto max-w-screen-sm'>
         {!authed &&
           <div className='text-center'>
-            <h3 className="mb-4 text-2xl font-robotoSlab font-semibold"><Link to='/' onClick={login} className="btn btn-ghost rounded-btn text-xl">Log in</Link> or <Link to='/' onClick={signUp} className="btn btn-ghost rounded-btn text-xl">Sign up</Link> to comment</h3>
+            <h3 className="mb-4 text-2xl font-robotoSlab font-semibold"><Link to='/' onClick={login} className="btn btn-ghost rounded-btn text-xl underline">Log in</Link> or <Link to='/' onClick={signUp} className="btn btn-ghost rounded-btn text-xl underline">Sign up</Link> to comment</h3>
           </div>
         }
         {authed && 

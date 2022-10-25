@@ -29,12 +29,12 @@ function Home({ showLogin, setShowLogin, setShowSignUp, showSignUp }) {
                 <Login />
                 <div className='flex flex-col items-center gap-y-3 pt-6'>
                   <p>Don't have an account?</p>
-                  <button type='button' onClick={handleClickSign} className="btn btn-ghost rounded-btn">Sign up</button>
+                  <button type='button' onClick={handleClickSign} className="btn btn-ghost rounded-btn underline">Sign up</button>
                 </div>
               </div>}
               {!authed && showSignUp && <div>
                 <SignUp />
-                <button type='button' onClick={handleClickLog} className="btn btn-ghost rounded-btn mt-3">Log in</button>
+                <button type='button' onClick={handleClickLog} className="btn btn-ghost rounded-btn mt-3 underline">Log in</button>
                 </div>}
               {authed && 'You are logged in.'}
             </div>
