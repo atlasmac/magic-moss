@@ -34,7 +34,7 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map(data => {
             return {
-              date: dayjs(data.date).format('ddd MM/DD h:mm A'),
+              date: dayjs(data.date).format('ddd MM/D h:mm A'),
               cfs: data.cfs,
               ft: data.ft,
             }
@@ -53,7 +53,7 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map(data => {
             return {
-              date: dayjs(data.date).format('ddd MM/DD h:mm A'),
+              date: dayjs(data.date).format('ddd MM/D h:mm A'),
               cfs: data.cfs,
               ft: data.ft
             }
