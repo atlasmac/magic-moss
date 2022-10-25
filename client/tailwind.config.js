@@ -24,14 +24,9 @@ module.exports = {
        },
     },
   },
-  plugins: [
-    require("daisyui"),
-    require('tailwind-scrollbar')({ nocompatible: true }),
-  ],
-
   daisyui: {
     styled: true,
-    themes: true,
+    themes: ["dark"],
     base: true,
     utils: true,
     logs: true,
@@ -39,4 +34,8 @@ module.exports = {
     prefix: "",
     darkTheme: "dark",
   },
+  plugins: [
+    require("daisyui"),
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ]
 }

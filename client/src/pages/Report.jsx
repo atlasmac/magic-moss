@@ -272,7 +272,6 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
       {forecastData.length < 1 &&
         <Loading />
       }
-
       {forecastData.length > 1 &&
         <div>
           <CurrentReport spot={spot} level={lastObserved} />
