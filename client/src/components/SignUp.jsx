@@ -60,7 +60,7 @@ function SignUp() {
         <input
           type='text'
           name='userName'
-          placeholder='userName'
+          placeholder='username'
           onChange={handleFormChange}
           className='input border-2 border-base-300 w-full max-w-sm'
         />

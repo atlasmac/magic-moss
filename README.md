@@ -15,5 +15,11 @@ The backend follows MVC principals and was built using Node, Express, Mongoose a
 ### Deployment 
 The site is deployed on Heroku. The Heroku cron scheduler is used to run a script that fetches NOAA river data, parses it to JSON and updates the DB with the most recent river data.
 
- ### Visit the site at:
+## Optimizations
+This is a long term project with many future optimizations planned.
+- I would like to update my authentication strategy to include google and facebook auth strategies.
+- I want to add more functionality to updating user info, specifically usernames, passwords and user info.
+- I would like to add user photo uploads for each wave. This will allow users to share their photos of the wave with others in the local river surfing community.
+
+## Visit the site at:
 [Magic Moss](https://safe-castle-40765.herokuapp.com/).

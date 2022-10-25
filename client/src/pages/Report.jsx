@@ -78,7 +78,8 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
                 xAxisKey: 'date',
                 yAxisKey: 'cfs'
               }
-            }, {
+            },
+            {
               label: ["Current"],
               data: lastObserved,
               backgroundColor: ["red"],
