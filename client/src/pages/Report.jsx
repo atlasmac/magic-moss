@@ -73,6 +73,7 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
               borderWidth: 2,
               pointRadius: 0,
               pointHoverRadius: 5,
+              order: 2,
               tension: 0.5,
               parsing: {
                 xAxisKey: 'date',
@@ -88,6 +89,7 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
               pointRadius: 9,
               pointHoverBorderWidth: 9,
               pointStyle: 'star',
+              order: 1,
               parsing: {
                 xAxisKey: 'date',
                 yAxisKey: 'cfs'
@@ -103,6 +105,7 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
               pointRadius: 0,
               pointHoverRadius: 5,
               tension: .5,
+              order: 3,
               parsing: {
                 xAxisKey: 'date',
                 yAxisKey: 'cfs'
