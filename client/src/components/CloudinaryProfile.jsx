@@ -36,7 +36,7 @@ const CloudinaryProfile = () => {
           profileImg: profileImg ? profileImg : user.profileImg,
           oldImg: user.profileImg,
         },
-        url: `${process.env.REACT_APP_API_URL}/updateUser`,
+        url: `${process.env.REACT_APP_API_URL}/user/updateUser`,
         withCredentials: true,
       });
       setMsg({

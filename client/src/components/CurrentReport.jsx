@@ -45,7 +45,7 @@ const CurrentReport = ({ level, spot }) => {
           id: user._id,
           favorites: newArr,
         },
-        url: `${process.env.REACT_APP_API_URL}/updateFavorites`,
+        url: `${process.env.REACT_APP_API_URL}/user/updateFavorites`,
         withCredentials: true,
       });
       console.log(response);
@@ -73,7 +73,7 @@ const CurrentReport = ({ level, spot }) => {
           id: user._id,
           favorites: newArr,
         },
-        url: `${process.env.REACT_APP_API_URL}/updateFavorites`,
+        url: `${process.env.REACT_APP_API_URL}/user/updateFavorites`,
         withCredentials: true,
       });
       console.log(response);

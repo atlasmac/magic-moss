@@ -9,6 +9,8 @@ const connectDB = require('./config/database');
 const mainRoutes = require('./routes/main');
 const commentRoutes = require('./routes/comments')
 const reportRoutes = require('./routes/reports')
+const userRoutes = require('./routes/user')
+
 
 const cors = require('cors');
 
@@ -50,6 +52,7 @@ if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 
 	app.use('/api/', mainRoutes);
+  app.use("/api/user", userRoutes);
   app.use("/api/comment", commentRoutes);
   app.use("/api/report", reportRoutes);
 
@@ -59,6 +62,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
 //Setup Routes For Which The Server Is Listening
   app.use('/', mainRoutes);
+  app.use("/user", userRoutes);
   app.use("/comment", commentRoutes);
   app.use("/report", reportRoutes);
 }
