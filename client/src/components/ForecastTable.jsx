@@ -21,7 +21,7 @@ const ForecastTable = ({ forecastData }) => {
   forecastDataNoon.forEach((data) => {
     headers.push(<td key={data.date}>{data.date.split(' ')[0]}</td>);
     flows.push(<td key={data.date}>{data.cfs}</td>);
-    height.push(<td key={data.date}>{data.ft + data.date}</td>);
+    height.push(<td key={data.date}>{data.ft}</td>);
     waveDescription.push([data.cfs, +siteNumber]);
   })
 
