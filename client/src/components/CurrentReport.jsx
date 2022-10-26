@@ -11,15 +11,16 @@ import { getLocation } from '../helpers/getLocation';
 
 
 const CurrentReport = ({ level, spot }) => {
-  const { siteNumber } = useParams();
+  let { siteNumber } = useParams();
+  siteNumber = parseInt(siteNumber)
   const { user, authed } = useAuth();
   const [favorite, setFavorite] = React.useState(
-    (user.favorites?.some(e => e.siteNumber == siteNumber)) ? true : false
+    (user.favorites?.some(e => e.siteNumber === siteNumber)) ? true : false
   )
   const { getReport } = useReportHook();
 
   React.useEffect(() => {
-    if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
+    if (user.favorites?.some(e => e.siteNumber === siteNumber)) {
       setFavorite(true);
     }
     else {
@@ -28,7 +29,7 @@ const CurrentReport = ({ level, spot }) => {
   }, [siteNumber, user.favorites, spot]);
 
 
-  const addFavorite = async event => {
+  const addFavorite = async() => {
     let newArr;
     if (user.favorites) {
       user.favorites.push({ siteNumber: siteNumber, wave: spot });
@@ -49,7 +50,7 @@ const CurrentReport = ({ level, spot }) => {
       });
       console.log(response);
 
-      if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
+      if (user.favorites?.some(e => e.siteNumber === siteNumber)) {
         setFavorite(true);
       } else {
         setFavorite(false);
@@ -77,7 +78,7 @@ const CurrentReport = ({ level, spot }) => {
       });
       console.log(response);
 
-      if (user.favorites?.some(e => e.siteNumber == siteNumber)) {
+      if (user.favorites?.some(e => e.siteNumber === siteNumber)) {
         setFavorite(true);
       } else {
         setFavorite(false);

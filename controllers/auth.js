@@ -183,9 +183,10 @@ module.exports = {
     });
   },
   updateFavorites: async (req, res) => {
+    console.log('req: ',req.session.passport.user)
     try {
       await User.findOneAndUpdate(
-        { _id: req.session.passport.user.id },
+        { _id: req.session.passport.user },
         {
           favorites: req.body.favorites,
         },

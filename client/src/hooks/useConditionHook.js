@@ -5,7 +5,6 @@ function useConditionHook() {
       //brennans     
       if (el[1] === 12340500) {
         if (el[0] < 2000) {
-          console.log(el[1], 'el', el[0]) 
           return "Flat";
         } else if (el[0] >= 2000 && el[0] < 3200) {
           return "Poor to impossible"
