@@ -6,14 +6,11 @@ import ForecastTable from '../components/ForecastTable';
 import CurrentReport from '../components/CurrentReport';
 import Loading from '../components/Loading';
 import Comments from '../components/Comments';
-import dayjs, { Dayjs } from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
   const { siteNumber } = useParams();
-  const [riverDataObj, setriverDataObj] = useState([]);
   const [spot, setSpot] = useState('');
-  const [observed, setObserved] = useState([]);
   const [lastObserved, setLastObserved] = useState([]);
   const [forecastData, setForecastData] = useState([]);
   const [graphData, setGraphData] = useState({
@@ -28,20 +25,16 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
           url: `${process.env.REACT_APP_API_URL}/report/${siteNumber}`,
           withCredentials: true,
         });
-
         const riverData = response.data[0]
         const observedData = riverData.observed
-        console.log(observedData)
-
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
-
         const forecastData = riverData.forecast
 
+        //these get passed as props
         setForecastData(forecastData)
         setLastObserved(lastObserved[0])
-        setriverDataObj(riverData);
         setSpot(riverData.wave);
-        setObserved(observedData)
+
         setGraphData({
           datasets: [
             {
