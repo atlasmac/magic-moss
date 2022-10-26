@@ -5,11 +5,12 @@ const { promisify } = require('util');
 const siteNumber = 12354500;
 const site = "Zero Wave"
 const axios = require('axios');
+const dayjs = require('dayjs')
 
 const fetch = async (...args) => {
-  return (await fetchP).default(...args); 
+  return (await fetchP).default(...args);
 }
-async function fetchWeather(){
+async function fetchWeather() {
   // const writeFile = promisify(fs.writeFile);
 
   const res = await fetch(
@@ -28,16 +29,41 @@ async function fetchWeather(){
       ft: parseFloat(a.primary[0]?._)
 
     };
-  });
+  })
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .map(data => {
+      return {
+        date: dayjs(data.date).format('ddd MM/D h:mm A'),
+        cfs: data.cfs,
+        ft: data.ft,
+      }
+    })
+
+  const filteredObserved = observed.filter((data, i) => {
+    let dateParts = data.date.split(' ');
+    if (dateParts[2] === '12:00' || dateParts[2] === '6:00' || (i === (observed.length - 1))) {
+      return data
+    }
+    return null;
+  })
+
   const forecast = data.site.forecast[0]?.datum.map((a) => {
     return {
       date: a.valid[0]?._,
       cfs: parseFloat(a.secondary[0]?._),
       ft: parseFloat(a.primary[0]?._)
     };
-  });
+  })
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .map(data => {
+      return {
+        date: dayjs(data.date).format('ddd MM/D h:mm A'),
+        cfs: data.cfs,
+        ft: data.ft
+      }
+    });
   // console.log(data);
-  // await writeFile('data/weatherStRegis.json', JSON.stringify({ siteNumber, wave : site, observed, forecast }, null, 2));
+  // await writeFile('data/weatherStRegis.json', JSON.stringify({ siteNumber, wave : site, filteredObserved, forecast }, null, 2));
   const updateWeather = async event => {
     try {
       const response = await axios({
@@ -45,13 +71,13 @@ async function fetchWeather(){
         data: {
           siteNumber: siteNumber,
           wave: site,
-          observed: observed,
+          observed: filteredObserved,
           forecast: forecast,
         },
         url: `https://safe-castle-40765.herokuapp.com/api/report/updateReport/${siteNumber}`,
         withCredentials: true,
       });
-    }		catch (err) {
+    } catch (err) {
       console.log(err);
     }
   }

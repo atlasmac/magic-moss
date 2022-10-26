@@ -2,19 +2,20 @@ const { Parser } = require('xml2js');
 const fetchP = import('node-fetch');
 const fs = require('fs');
 const { promisify } = require('util');
-const siteNumber = 12340500;
-const site = "Brennan's Wave"
+const siteNumber = 13022500;
+const site = "Lunch Counter";
 const axios = require('axios');
-const dayjs = require('dayjs');
+const dayjs = require('dayjs')
 
 const fetch = async (...args) => {
   return (await fetchP).default(...args);
 }
 async function fetchWeather() {
+
   // const writeFile = promisify(fs.writeFile);
 
   const res = await fetch(
-    'https://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=abom8&output=xml'
+    'https://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=alpw4&output=xml'
   );
   const xml = await res.text();
   const xmlParser = new Parser();
@@ -25,7 +26,7 @@ async function fetchWeather() {
   const observed = data.site.observed[0]?.datum.map((a) => {
     return {
       date: a.valid[0]?._,
-      cfs: parseFloat(a.secondary[0]?._),
+      cfs: parseFloat(a.secondary[0]?._)*1000,
       ft: parseFloat(a.primary[0]?._)
 
     };
@@ -37,7 +38,7 @@ async function fetchWeather() {
         cfs: data.cfs,
         ft: data.ft,
       }
-    });
+    })
 
   const filteredObserved = observed.filter((data, i) => {
     let dateParts = data.date.split(' ');
@@ -47,10 +48,11 @@ async function fetchWeather() {
     return null;
   })
 
+
   const forecast = data.site.forecast[0]?.datum.map((a) => {
     return {
       date: a.valid[0]?._,
-      cfs: parseFloat(a.secondary[0]?._),
+      cfs: parseFloat(a.secondary[0]?._)*1000,
       ft: parseFloat(a.primary[0]?._)
     };
   })
@@ -62,8 +64,9 @@ async function fetchWeather() {
         ft: data.ft
       }
     });
+
   // console.log(data);
-  // await writeFile('data/weatherMissoula.json', JSON.stringify({ siteNumber, wave : site, filteredObserved, forecast }, null, 2));
+  // await writeFile('data/weatherLunchCounter.json', JSON.stringify({ siteNumber, wave: site, filteredObserved, forecast }, null, 2));
   const updateWeather = async event => {
     try {
       const response = await axios({
