@@ -7,6 +7,7 @@ import CurrentReport from '../components/CurrentReport';
 import Loading from '../components/Loading';
 import Comments from '../components/Comments';
 import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
   const { siteNumber } = useParams();
@@ -27,6 +28,13 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
         });
         const riverData = response.data[0]
         const observedData = riverData.observed
+        //.map((e)=>{
+        //   return {
+        //     date: dayjs(e.date).format('ddd MM/D h:mm A'),
+        //     cfs: e.cfs,
+        //     ft: e.ft,
+        //   }
+        // })
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
         const forecastData = riverData.forecast
 
