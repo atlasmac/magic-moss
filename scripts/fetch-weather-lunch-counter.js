@@ -25,13 +25,13 @@ async function fetchWeather() {
 
   const observed = data.site.observed[0]?.datum.map((a) => {
     return {
-      date: a.valid[0]?._,
+      date: new Date(a.valid[0]?._).toLocaleString('en-US', {timeZone: 'America/Denver'}),
       cfs: parseFloat(a.secondary[0]?._)*1000,
       ft: parseFloat(a.primary[0]?._)
 
     };
   })
-    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .sort((a, b) => a.date - b.date)
     .map(data => {
       return {
         date: dayjs(data.date).format('ddd MM/D h:mm A'),
@@ -51,12 +51,12 @@ async function fetchWeather() {
 
   const forecast = data.site.forecast[0]?.datum.map((a) => {
     return {
-      date: a.valid[0]?._,
+      date: new Date(a.valid[0]?._).toLocaleString('en-US', {timeZone: 'America/Denver'}),
       cfs: parseFloat(a.secondary[0]?._)*1000,
       ft: parseFloat(a.primary[0]?._)
     };
   })
-    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .sort((a, b) => a.date - b.date)
     .map(data => {
       return {
         date: dayjs(data.date).format('ddd MM/D h:mm A'),
