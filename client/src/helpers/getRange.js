@@ -1,15 +1,19 @@
-export function getRange(siteNumber){
+export function getRange(siteNumber) {
   //brennans
-  if (siteNumber === 12340500){
+  if (siteNumber === 12340500) {
     return '3200 - 20,000'
   }
   //zero
-  if (siteNumber === 12354500){
+  if (siteNumber === 12354500) {
     return '2300 - 5500'
   }
   //pipeline
-  if (siteNumber === 13337000){
+  if (siteNumber === 13337000) {
     return '4500 - 15,500'
+  }
+  //lunchcounter
+  if (siteNumber === 13022500) {
+    return '7000 - 12,500'
   }
   return 'unavailable'
 }

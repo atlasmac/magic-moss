@@ -11,5 +11,11 @@ export function getLocation(siteNumber){
   if (siteNumber === 13337000){
     return 'https://goo.gl/maps/65rwVU1ZetpmsfPj8'
   }
+  //lunchcounter
+  if (siteNumber === 13022500){
+    return 'https://goo.gl/maps/eu68KcMiGrQxiVGXA'
+  }
+
+  
   return 'https://www.google.com/maps'
 }
