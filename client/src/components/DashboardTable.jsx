@@ -33,10 +33,10 @@ const DashboardTable = () => {
   let currentFlows = [];
   let conditions = [];
   favoriteData.forEach((data, i) => {
-    let cfs = data.observed.sort((a, b)=> new Date(a) - new Date(b))[0].cfs
+    let cfs = data.observed[data.observed.length - 1].cfs
     console.log( data.siteNumber, cfs);
-    waves.push(<li key={`${i}${data.observed[0].date}`} className={`text text-sm h-10 md:text-lg`} ><NavLink className={'link-accent'} to={`/report/${data.siteNumber}`}>{data.wave}</NavLink></li>);
-    currentFlows.push(<li key={`${i}${data.observed[0].date}`} className={`text-sm h-10 md:text-lg`} >{cfs} CFS</li>);
+    waves.push(<li key={`${i}${data.observed[data.observed.length - 1].date}`} className={`text text-sm h-10 md:text-lg`} ><NavLink className={'link-accent'} to={`/report/${data.siteNumber}`}>{data.wave}</NavLink></li>);
+    currentFlows.push(<li key={`${i}${data.observed[data.observed.length - 1].date}`} className={`text-sm h-10 md:text-lg`} >{cfs} CFS</li>);
     conditions.push([cfs, data.siteNumber]);
   });
   const conditionsLi = getConditions(conditions).map((el, i) => (<li className={`text-sm h-10 md:text-lg`} key={i}>{el}</li>));

@@ -31,33 +31,12 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
 
         const riverData = response.data[0]
         const observedData = riverData.observed
-          .sort((a, b) => new Date(a.date) - new Date(b.date))
-          .map(data => {
-            return {
-              date: dayjs(data.date).format('ddd MM/D h:mm A'),
-              cfs: data.cfs,
-              ft: data.ft,
-            }
-          })
+        console.log(observedData)
+
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
 
-        const testObservedFilter = observedData.filter((data, i ) => {
-          let dateParts = data.date.split(' ');
-          if (dateParts[2] === '12:00' || dateParts[2] === '6:00' || (i === (observedData.length - 1)) ) {
-            return dateParts;
-          }
-          return null;
-        })
-
         const forecastData = riverData.forecast
-          .sort((a, b) => new Date(a.date) - new Date(b.date))
-          .map(data => {
-            return {
-              date: dayjs(data.date).format('ddd MM/D h:mm A'),
-              cfs: data.cfs,
-              ft: data.ft
-            }
-          })
+
         setForecastData(forecastData)
         setLastObserved(lastObserved[0])
         setriverDataObj(riverData);
@@ -67,7 +46,7 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
           datasets: [
             {
               label: ["Observed"],
-              data: testObservedFilter,
+              data: observedData,
               backgroundColor: ["rgb(152, 168, 248)"],
               borderColor: "rgb(152, 168, 248)",
               borderWidth: 2,
