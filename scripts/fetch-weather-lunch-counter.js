@@ -31,7 +31,7 @@ async function fetchWeather() {
 
     };
   })
-    .sort((a, b) => a.date - b.date)
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
     .map(data => {
       return {
         date: dayjs(data.date).format('ddd MM/D h:mm A'),
@@ -56,7 +56,7 @@ async function fetchWeather() {
       ft: parseFloat(a.primary[0]?._)
     };
   })
-    .sort((a, b) => a.date - b.date)
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
     .map(data => {
       return {
         date: dayjs(data.date).format('ddd MM/D h:mm A'),
