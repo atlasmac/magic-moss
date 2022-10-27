@@ -13,7 +13,7 @@ const updateMissoula = async event => {
         observed: missoula.observed,
         forecast: missoula.forecast,
       },
-      url: `https://safe-castle-40765.herokuapp.com/api/report/updateReport/${missoula.siteNumber}`,
+      url: `https://magicmoss.herokuapp.com/api/report/updateReport/${missoula.siteNumber}`,
       withCredentials: true,
     });
   }		catch (err) {
@@ -30,7 +30,7 @@ const updateStRegis = async event => {
         observed: stRegis.observed,
         forecast: stRegis.forecast,
       },
-      url: `https://safe-castle-40765.herokuapp.com/api/report/updateReport/${stRegis.siteNumber}`,
+      url: `https://magicmoss.herokuapp.com/api/report/updateReport/${stRegis.siteNumber}`,
       withCredentials: true,
     });
   }		catch (err) {
@@ -47,7 +47,7 @@ const updateLochsa = async event => {
         observed: lochsa.observed,
         forecast: lochsa.forecast,
       },
-      url: `https://safe-castle-40765.herokuapp.com/api/report/updateReport/${lochsa.siteNumber}`,
+      url: `https://magicmoss.herokuapp.com/api/report/updateReport/${lochsa.siteNumber}`,
       withCredentials: true,
     });
   }		catch (err) {

@@ -76,7 +76,7 @@ async function fetchWeather() {
           observed: filteredObserved,
           forecast: forecast,
         },
-        url: `https://safe-castle-40765.herokuapp.com/api/report/updateReport/${siteNumber}`,
+        url: `https://magicmoss.herokuapp.com/api/report/updateReport/${siteNumber}`,
         withCredentials: true,
       });
     } catch (err) {
