@@ -22,4 +22,4 @@ This is a long term project with many future optimizations planned.
 - I would like to add user photo uploads for each wave. This will allow users to share their photos of the wave with others in the local river surfing community.
 
 ## Visit the site at:
-[Magic Moss](https://safe-castle-40765.herokuapp.com/).
+[Magic Moss](https://magicmoss.herokuapp.com/)
