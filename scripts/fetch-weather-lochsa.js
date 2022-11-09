@@ -26,7 +26,7 @@ async function fetchWeather() {
   const observed = data.site.observed[0]?.datum.map((a) => {
     
     return {
-      date: new Date(a.valid[0]?._).toLocaleString('en-US', {timeZone: 'America/Los_Angeles'}),
+      date: a.valid[0]?._,
       cfs: parseFloat(a.secondary[0]?._),
       ft: parseFloat(a.primary[0]?._)
 
@@ -51,7 +51,7 @@ async function fetchWeather() {
 
   const forecast = data.site.forecast[0]?.datum.map((a) => {
     return {
-      date: new Date(a.valid[0]?._).toLocaleString('en-US', {timeZone: 'America/Denver'}),
+      date: a.valid[0]?._,
       cfs: parseFloat(a.secondary[0]?._),
       ft: parseFloat(a.primary[0]?._)
     };
