@@ -64,6 +64,7 @@ async function fetchWeather() {
         ft: data.ft
       }
     });
+
   // console.log(data);
   // await writeFile('data/weatherLochsa.json', JSON.stringify({ siteNumber, wave : site, filteredObserved, forecast }, null, 2));
   const updateWeather = async event => {

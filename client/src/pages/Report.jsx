@@ -35,6 +35,11 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
         //     ft: e.ft,
         //   }
         // })
+        
+        riverData.observed.forEach(el =>{
+          console.log(new Date(el.date))
+        })
+
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
         const forecastData = riverData.forecast
 

@@ -9,6 +9,7 @@ const ForecastTable = ({ forecastData }) => {
   const { siteNumber } = useParams();
 
   const forecastDataNoon = forecastData.filter(data => {
+    // console.log(data.date)
     let dateParts = data.date.split(' ');
     return dateParts[2] === '12:00' && dateParts[3] === 'PM';
   })
