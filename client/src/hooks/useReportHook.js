@@ -2,7 +2,7 @@ function useReportHook() {
   return {
     getReport(siteNumber, cfs) {
       // Missoula
-      if (siteNumber === '12340500') {
+      if (siteNumber === 12340500) {
         if (cfs < 2000) {
           return "Both middle and main wave at Brennan's are pretty much impossible to surf at the moment due to low water levels.";
         } else if (cfs >= 2000 && cfs < 3200) {
@@ -18,7 +18,7 @@ function useReportHook() {
         }
       }
       //st regis Zer0 2300 to 4500
-      if (siteNumber === '12354500') {
+      if (siteNumber === 12354500) {
         if (cfs < 2300) {
           return "Zero is out right now. Should come in if the levels get up 2300 CFS";
         } else if (cfs >= 2300 && cfs < 3000) {
@@ -32,7 +32,7 @@ function useReportHook() {
         }
       }
       /// lochsa pipeline
-      if (siteNumber === '13337000') {
+      if (siteNumber === 13337000) {
         if (cfs < 4500) {
           return "Unless you want some scenic views. It's not worth the drive until levels are above 4500 cfs.";
         } else if (cfs >= 4500 && cfs < 7000) {
