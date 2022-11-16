@@ -32,11 +32,7 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
         const riverData = response.data[0]
         const observedData = riverData.observed
         .map((e)=>{
-          console.log(e.date)
-          let d = dayjs(e.date).utc().format()
-          let date = new Date(d).toLocaleString()
-          console.log(date)
-
+          let date = new Date(e.date)
           return {
             date: dayjs(date).format('ddd MM/D h:mm A'),
             cfs: e.cfs,
@@ -45,10 +41,33 @@ const Report = ({ showLogin, setShowLogin, setShowSignUp, showSignUp }) => {
         })
 
         const lastObserved = observedData.filter((el, i, arr) => i === (arr.length - 1))
+        
         const forecastData = riverData.forecast
+        .map((e)=>{
+          let date = new Date(e.date)
+          return {
+            date: dayjs(date).format('ddd MM/D h:mm A'),
+            cfs: e.cfs,
+            ft: e.ft,
+          }
+        })
+
+        const forecastTableData = riverData.forecast.map(e =>{
+          return {
+            date: dayjs(e.date).format('ddd MM/D h:mm A'),
+            cfs: e.cfs,
+            ft: e.ft,
+          }
+        }).filter(data => {
+          // console.log(data.date)
+          let dateParts = data.date.split(' ');
+          return dateParts[2] === '12:00' && dateParts[3] === 'PM';
+        })
+        
+        console.log(forecastTableData)
 
         //these get passed as props
-        setForecastData(forecastData)
+        setForecastData(forecastTableData)
         setLastObserved(lastObserved[0])
         setSpot(riverData.wave);
 

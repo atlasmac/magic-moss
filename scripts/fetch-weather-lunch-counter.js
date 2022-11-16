@@ -46,7 +46,13 @@ async function fetchWeather() {
       return data
     }
     return null;
-  })
+  }).map(data => {
+    return {
+      date: new Date(dayjs(data.date).format()),
+      cfs: data.cfs,
+      ft: data.ft,
+    }
+  });
 
 
   const forecast = data.site.forecast[0]?.datum.map((a) => {
@@ -59,7 +65,7 @@ async function fetchWeather() {
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .map(data => {
       return {
-        date: dayjs(data.date).format('ddd MM/D/YYYY h:mm A'),
+        date: data.date,
         cfs: data.cfs,
         ft: data.ft
       }

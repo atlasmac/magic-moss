@@ -8,18 +8,12 @@ const ForecastTable = ({ forecastData }) => {
   const { getConditions } = useConditionHook();
   const { siteNumber } = useParams();
 
-  const forecastDataNoon = forecastData.filter(data => {
-    // console.log(data.date)
-    let dateParts = data.date.split(' ');
-    return dateParts[2] === '12:00' && dateParts[3] === 'PM';
-  })
-
   const headers = [];
   const flows = [];
   const height = [];
   const waveDescription = [];
 
-  forecastDataNoon.forEach((data) => {
+  forecastData.forEach((data) => {
     headers.push(<td key={data.date}>{data.date.split(' ')[0]}</td>);
     flows.push(<td key={data.date}>{data.cfs}</td>);
     height.push(<td key={data.date}>{data.ft}</td>);

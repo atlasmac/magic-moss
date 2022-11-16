@@ -39,13 +39,21 @@ async function fetchWeather() {
       }
     });
 
-  const filteredObserved = observed.filter((data, i) => {
+  const filteredObserved = observed
+  .filter((data, i) => {
     let dateParts = data.date.split(' ');
     if (dateParts[2] === '12:00' || dateParts[2] === '6:00' || (i === (observed.length - 1))) {
       return data
     }
     return null;
   })
+  .map(data => {
+    return {
+      date: new Date(dayjs(data.date).format()),
+      cfs: data.cfs,
+      ft: data.ft,
+    }
+  });
 
   const forecast = data.site.forecast[0]?.datum.map((a) => {
     return {
@@ -57,7 +65,7 @@ async function fetchWeather() {
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .map(data => {
       return {
-        date: dayjs(data.date).format('ddd MM/D/YYYY h:mm A'),
+        date: data.date,
         cfs: data.cfs,
         ft: data.ft
       }
